@@ -1,0 +1,78 @@
+.profile-page {
+  max-width: 1440px;
+  margin-inline: auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  // height: 80vh;
+
+  .profile-details {
+    width: 70%;
+    margin-top: 3rem;
+
+    .side-bar {
+      width: max-content;
+
+      .profile-link {
+        display: flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem;
+        padding-right: 0;
+
+        &.active {
+          color: white;
+          background-color: #fa4032;
+        }
+
+        p {
+          font-size: 1.25rem;
+        }
+
+        svg {
+          width: 32px;
+          margin-left: auto;
+
+          g {
+            path {
+              fill: #000;
+            }
+
+            path.active {
+              fill: #fff;
+            }
+          }
+        }
+      }
+
+      .logout-btn {
+        display: flex;
+        align-items: center;
+        background-color: crimson;
+        color: white;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        padding-right: 0.1rem;
+        gap: 0.5rem;
+        margin-top: 2rem;
+
+        img {
+          width: 24px;
+        }
+
+        p {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+
+  img {
+    width: 180px;
+  }
+
+  h1 {
+    margin-top: 1rem;
+  }
+}

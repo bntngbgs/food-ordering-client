@@ -1,0 +1,16 @@
+.header {
+  background-color: #fa4032;
+  padding-block: 0.65rem;
+
+  .navbar {
+    max-width: 1440px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+
+    .logo {
+      max-width: 220px;
+    }
+  }
+}

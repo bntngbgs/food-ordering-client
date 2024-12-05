@@ -1,0 +1,18 @@
+.tag {
+  background-color: lightgray;
+  display: inline-flex;
+  gap: 4px;
+  padding: 2px 6px;
+  align-items: center;
+  border-radius: 16px;
+
+  .tag-icon {
+    width: 18px;
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+  }
+}

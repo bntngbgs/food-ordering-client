@@ -1,0 +1,18 @@
+.pagination-wrapper {
+  margin-top: 2.25rem;
+  display: flex;
+  gap: 0.65rem;
+
+  span {
+    border: 1px solid lightgray;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 700;
+    // font-size: 14px;
+  }
+
+  .active-paginate {
+    background-color: #fa4032;
+    color: white;
+  }
+}

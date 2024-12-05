@@ -1,0 +1,41 @@
+button {
+  cursor: pointer;
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.15rem;
+  border-radius: 6px;
+}
+
+.outline-reversed {
+  background-color: transparent;
+  border: 1px solid #fa4032;
+  color: #fa4032;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.15rem;
+  border-radius: 6px;
+}
+
+.filled {
+  background-color: white;
+  border: 1px solid white;
+  color: #fa4032;
+  padding: 0.25rem 1.25rem;
+  font-size: 1.15rem;
+  border-radius: 6px;
+  margin-left: 0.5rem;
+}
+
+.filled-reversed {
+  background-color: #fa4032;
+  border: 1px solid #fa4032;
+  color: white;
+  padding: 0.25rem 1.25rem;
+  font-size: 1.15rem;
+  border-radius: 6px;
+  // margin-left: 0.5rem;
+}

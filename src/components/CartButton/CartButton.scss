@@ -1,0 +1,30 @@
+.cart-button {
+  width: 32px;
+  margin-right: 1.5rem;
+  margin-left: 0.75rem;
+  position: relative;
+
+  .bubble {
+    background-color: #006bff;
+    width: 26px;
+    height: 26px;
+    // padding: 0.5rem;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+
+    position: absolute;
+    top: -13px;
+    right: -8px;
+
+    span {
+      font-size: 12px;
+      // display: inline-block;
+      font-weight: 700;
+      color: white;
+      // width: 24px;
+      // height: 24px;
+    }
+  }
+}

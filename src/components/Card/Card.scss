@@ -1,0 +1,36 @@
+.card {
+  flex: 0 1 335px;
+  border: 2px solid lightgrey;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .card-image {
+    width: 100%;
+  }
+
+  .description {
+    padding: 0 0.75rem;
+    padding-top: 0.25rem;
+  }
+
+  .details {
+    padding: 0.75rem;
+    margin-top: 0.35rem;
+    display: flex;
+    justify-content: space-between;
+
+    .cart-plus-button {
+      align-self: center;
+      width: 48px;
+      background-color: #fa4032;
+      border: none;
+      border-radius: 4px;
+
+      img {
+        width: 26px;
+        margin: auto;
+        padding-block: 0.25rem;
+      }
+    }
+  }
+}
