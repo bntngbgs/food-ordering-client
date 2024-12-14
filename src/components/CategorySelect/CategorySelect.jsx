@@ -9,6 +9,7 @@ const CategorySelect = () => {
         <option value="utama">Utama</option>
         <option value="minuman">Minuman</option>
         <option value="snack">Snack</option>
+        <option value="pastry">Pastry</option>
       </select>
       <div className="arrow-wrapper">
         <img src={arrowDown} />

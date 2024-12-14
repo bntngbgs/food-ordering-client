@@ -1,9 +1,29 @@
 import defaultAvatar from '../../assets/default-avatar.png';
 import logoutIcon from '../../assets/logout.png';
+import { useNavigate } from 'react-router';
+// import { useSelector } from 'react-redux';
 // import { NavLink } from 'react-router';
+import { persistor } from '../../app/store';
 import './Profile.scss';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../app/features/userSlice';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
+  // const { role } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    toast.error('Logout berhasil!');
+    localStorage.removeItem('user');
+    dispatch(userLogout());
+
+    persistor.purge().then(() => {
+      navigate('/');
+    });
+  };
+
   return (
     <div className="profile-page">
       <img src={defaultAvatar} className="avatar" />
@@ -80,7 +100,7 @@ const Profile = () => {
               </g>
             </svg>
           </div>
-          <button className="logout-btn">
+          <button className="logout-btn" onClick={handleLogout}>
             <p>Logout</p>
             <img src={logoutIcon} />
           </button>

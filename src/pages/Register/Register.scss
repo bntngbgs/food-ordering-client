@@ -32,13 +32,31 @@
       color: lightslategray;
     }
 
+    // input[type='password'] {
+    // margin-top: 0.75rem;
+    // margin-bottom: 0.95rem;
+    // }
+
+    input[type='text'],
+    input[type='email'],
     input[type='password'] {
-      margin-top: 0.75rem;
-      margin-bottom: 0.95rem;
+      margin-bottom: 0.75rem;
     }
 
-    input[type='text'] {
+    .input-error {
+      border: 1px solid red !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .error-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
       margin-bottom: 0.75rem;
+      p {
+        color: red;
+        margin-top: 0;
+      }
     }
   }
 

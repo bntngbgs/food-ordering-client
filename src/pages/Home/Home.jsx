@@ -4,10 +4,35 @@ import Pagination from '../../components/Pagination/Pagination';
 import burgerTestImage from '../../assets/burger.jpg';
 import pizzaTestImage from '../../assets/pizza.jpg';
 import coffeeTestImage from '../../assets/ice-coffee.jpg';
-
 import './Home.scss';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../app/features/userSlice';
+import axios from 'axios';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (user) {
+        try {
+          const result = await axios.get('http://localhost:3000/auth/me', {
+            headers: { Authorization: `Bearer ${user.token}` },
+          });
+
+          dispatch(userLogin(result.data));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+
+    getUserData();
+  }, [dispatch]);
+
   return (
     <section className="home">
       <h1>Home</h1>
