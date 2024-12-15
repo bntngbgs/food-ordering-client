@@ -33,7 +33,7 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <Link to="/profile">
+          <Link to="/user/profile">
             <div className="account-wrapper">
               <FaUserCircle color="white" size={26} />
               <p>{full_name}</p>

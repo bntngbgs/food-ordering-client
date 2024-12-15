@@ -1,0 +1,31 @@
+.order-profile {
+  padding-inline: 2rem;
+
+  .empty-order {
+    font-size: 1.45rem;
+    margin-top: 3rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+      background-color: #fa4032;
+      padding-block: 0.48rem;
+      color: white;
+      // text-align: left;
+    }
+
+    tr:nth-of-type(2n - 1) {
+      background-color: rgb(247, 247, 247);
+    }
+
+    td {
+      padding-block: 0.65rem;
+      text-align: center;
+    }
+  }
+}

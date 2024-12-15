@@ -7,6 +7,8 @@ const initialState = {
   customer_id: '',
   role: 'guest',
   loading: false,
+  token: '',
+  id: '',
 };
 
 const userSlice = createSlice({
@@ -18,7 +20,9 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.customer_id = action.payload.customer_id;
       state.role = action.payload.role;
+      state.id = action.payload._id;
       state.loading = false;
+      // state.token = action.payload.token;
     },
     userLogout: () => initialState,
   },
@@ -29,7 +33,9 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.customer_id = action.payload.customer_id;
         state.role = action.payload.role;
+        state.id = action.payload._id;
         state.loading = false;
+        // state.token = action.payload.token;
       }
     });
   },

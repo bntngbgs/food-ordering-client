@@ -1,0 +1,43 @@
+.address-profile {
+  padding-inline: 2rem;
+
+  .add-address {
+    background-color: #ffb200;
+    border: 1px solid #ffb200;
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .empty-address {
+    font-size: 1.45rem;
+    margin-top: 3rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    th {
+      background-color: #fa4032;
+      padding-block: 0.48rem;
+      color: white;
+      text-align: left;
+      padding-left: 0.75rem;
+    }
+
+    td {
+      padding-left: 0.75rem;
+      padding-block: 0.65rem;
+    }
+
+    tr td:first-child {
+      // color: blue;
+      width: 30%;
+    }
+  }
+}

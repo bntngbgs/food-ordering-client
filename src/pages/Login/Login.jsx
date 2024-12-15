@@ -51,17 +51,21 @@ const Login = () => {
         return setAuthError(user.data.message);
       }
 
+      // console.log(user);
+
       toast.success(user.data.message, {
-        autoClose: 2000,
+        autoClose: 1000,
       });
 
-      let userWithToken = {
-        email: user.data.user.email,
-        token: user.data.token,
-      };
+      // let userWithToken = {
+      //   ...user.data.user,
+      //   token: user.data.token,
+      // };
 
-      localStorage.setItem('user', JSON.stringify(userWithToken));
-      dispatch(userLogin(user.data));
+      // console.log(userWithToken);
+      // localStorage.setItem('user', JSON.stringify(userWithToken));
+      // dispatch(userLogin(userWithToken));
+      dispatch(userLogin(user.data.user));
       setTimeout(() => {
         navigate('/');
       }, 1000);
