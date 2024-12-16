@@ -21,28 +21,42 @@
 
     input[type='text'] {
       margin-bottom: 0.5rem;
-    }
-    input[type='text']::placeholder {
-      margin-bottom: 0.5rem;
-      padding-left: 0.15rem;
+      padding-left: 0.35rem;
+      padding-block: 0.15rem;
+      border-radius: 4px;
     }
 
     textarea {
       resize: none;
-    }
-
-    textarea::placeholder {
-      padding-left: 0.25rem;
+      padding-left: 0.35rem;
       padding-top: 0.15rem;
     }
 
     label {
-      margin-bottom: 0.05rem;
+      margin-bottom: 0.1rem;
     }
 
     select {
       padding-block: 0.15rem;
       padding-left: 0.15rem;
+    }
+
+    .input-error {
+      border: 1px solid red !important;
+      margin-bottom: 0.25rem !important;
+      border-radius: 4px;
+    }
+
+    .error-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+
+      p {
+        color: red;
+        margin-top: 0;
+      }
     }
   }
 }

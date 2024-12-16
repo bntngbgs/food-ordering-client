@@ -8,6 +8,7 @@ import { PiWarningCircleLight } from 'react-icons/pi';
 import Button from '../../components/Button/Button';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
+import { addAddress } from '../../app/features/deliveryAddressSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -57,15 +58,17 @@ const Login = () => {
         autoClose: 1000,
       });
 
-      // let userWithToken = {
-      //   ...user.data.user,
-      //   token: user.data.token,
-      // };
+      let userWithToken = {
+        ...user.data.user,
+        token: user.data.token,
+      };
 
       // console.log(userWithToken);
       // localStorage.setItem('user', JSON.stringify(userWithToken));
       // dispatch(userLogin(userWithToken));
-      dispatch(userLogin(user.data.user));
+
+      dispatch(userLogin(userWithToken));
+      dispatch(addAddress());
       setTimeout(() => {
         navigate('/');
       }, 1000);

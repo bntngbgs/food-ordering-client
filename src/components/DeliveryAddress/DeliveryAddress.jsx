@@ -1,38 +1,64 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
+import { fetchWhenLogin } from '../../app/features/deliveryAddressSlice';
 import AddressForm from '../AddressForm/AddressForm';
 import './DeliveryAddress.scss';
+import axios from 'axios';
 
 const DeliveryAddress = () => {
-  const [toggleForm, setToggleForm] = useState(false);
-  const state = true;
+  const { address, toggleForm } = useSelector((state) => state.deliveryAddress);
+  const { token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getDeliveryAddress = async () => {
+      try {
+        let response = await axios.get(
+          `http://localhost:3000/api/delivery-address`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        dispatch(fetchWhenLogin(response.data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getDeliveryAddress();
+  }, []);
 
   return (
     <div className="address-profile">
       <button
         className="add-address"
-        onClick={() => setToggleForm(!toggleForm)}
+        onClick={() => dispatch(toggleAddressForm())}
       >
         Tambah Alamat
       </button>
-      {state && !toggleForm && (
+      {address && !toggleForm && (
         <table>
-          <thead></thead>
-          <tr>
-            <th>Nama</th>
-            <th>Detail</th>
-          </tr>
-          <tbody>
+          <thead>
             <tr>
-              <td>Bandung</td>
-              <td>
-                JAWA BARAT, KOTA BANDUNG, BOJONGLOA KIDUNG, CIBADUYUT WETAN,
-                Sukaraja
-              </td>
+              <th>Nama</th>
+              <th>Detail</th>
             </tr>
+          </thead>
+
+          <tbody>
+            {address.length > 1 &&
+              address.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.nama}</td>
+                  <td>{`${item.provinsi}, ${item.kabupaten}, ${item.kecamatan}, ${item.kelurahan}, ${item.detail}`}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       )}{' '}
-      {!state && !toggleForm && (
+      {!address && !toggleForm && (
         <p className="empty-address">Anda belum memiliki alamat</p>
       )}
       {toggleForm && <AddressForm />}

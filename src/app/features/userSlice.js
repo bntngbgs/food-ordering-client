@@ -22,7 +22,7 @@ const userSlice = createSlice({
       state.role = action.payload.role;
       state.id = action.payload._id;
       state.loading = false;
-      // state.token = action.payload.token;
+      state.token = action.payload.token;
     },
     userLogout: () => initialState,
   },
@@ -35,7 +35,7 @@ const userSlice = createSlice({
         state.role = action.payload.role;
         state.id = action.payload._id;
         state.loading = false;
-        // state.token = action.payload.token;
+        state.token = action.payload.token;
       }
     });
   },

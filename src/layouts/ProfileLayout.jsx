@@ -3,6 +3,7 @@ import { useNavigate, Outlet, NavLink } from 'react-router';
 import { persistor } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../app/features/userSlice';
+import { removeWhenLogout } from '../app/features/deliveryAddressSlice';
 import { toast } from 'react-toastify';
 import { FaChevronRight } from 'react-icons/fa';
 import { TbLogout } from 'react-icons/tb';
@@ -19,6 +20,7 @@ const ProfileLayout = () => {
     });
 
     dispatch(userLogout());
+    dispatch(removeWhenLogout());
 
     persistor.purge().then(() => {
       navigate('/');
