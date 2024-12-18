@@ -28,7 +28,7 @@ const DeliveryAddress = () => {
     };
 
     getDeliveryAddress();
-  }, []);
+  }, [token, dispatch]);
 
   return (
     <div className="address-profile">

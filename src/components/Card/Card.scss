@@ -3,9 +3,17 @@
   border: 2px solid lightgrey;
   border-radius: 8px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .card-image {
     width: 100%;
+  }
+
+  .tag-wrapper {
+    margin-top: 1.25rem !important;
+    padding-left: 0.75rem;
   }
 
   .description {
@@ -15,12 +23,25 @@
 
   .details {
     padding: 0.75rem;
-    margin-top: 0.35rem;
+    padding-top: 0.15rem;
+    margin-top: 1.25rem;
     display: flex;
+    gap: 0.35rem;
     justify-content: space-between;
 
+    .price {
+      & > p {
+        font-weight: 600;
+        font-size: 1.25rem;
+      }
+
+      & > p {
+        margin-top: 0.15rem;
+      }
+    }
+
     .cart-plus-button {
-      align-self: center;
+      align-self: end;
       width: 48px;
       background-color: #fa4032;
       border: none;
