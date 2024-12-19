@@ -3,19 +3,29 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './features/userSlice';
 import deliveryAddressReducer from './features/deliveryAddressSlice';
+import productsReducer from './features/productsSlice';
+
+const productsPersistConfig = {
+  key: 'product',
+  storage,
+  blacklist: ['category', 'skip'],
+  version: 1,
+};
+
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['product'],
+  version: 1,
+};
 
 const rootReducer = combineReducers({
   user: userReducer,
   deliveryAddress: deliveryAddressReducer,
+  product: persistReducer(productsPersistConfig, productsReducer),
 });
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  version: 1,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

@@ -16,10 +16,10 @@ const deliveryAddressSlice = createSlice({
     toggleAddressForm: (state) => {
       state.toggleForm = !state.toggleForm;
     },
-    removeWhenLogout: () => initialState,
     fetchWhenLogin: (state, action) => {
       state.address = action.payload.data;
     },
+    removeWhenLogout: () => initialState,
   },
 });
 

@@ -1,11 +1,52 @@
-import './CategorySelect.scss';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {
+  addCategory,
+  // addAllProducts,
+  // setFilteredCount,
+  setGlobalCount,
+} from '../../app/features/productsSlice';
 import arrowDown from '../../assets/arrow-down.png';
+import './CategorySelect.scss';
 
 const CategorySelect = () => {
+  // const { limit } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  const handleSelect = async (e) => {
+    const selectedOption = e.target.value;
+    try {
+      const productLength = await axios.get(
+        `http://localhost:3000/api/products?category=${selectedOption}`
+      );
+
+      // const product = await axios.get(
+      //   `http://localhost:3000/api/products?category=${selectedOption}&limit=${limit}`
+      // );
+
+      // dispatch(addAllProducts(product.data.data));
+      // dispatch(setFilteredCount(product.data.data));
+      dispatch(setGlobalCount(productLength.data.data));
+      dispatch(addCategory(selectedOption));
+      // dispatch(setDocumentLength(product.data.data));
+
+      // setTestProduct(product.data.data);
+      // setDocumentLength(product.data.count);
+      // console.log(product);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="custom-dropdown">
-      <select name="category" id="category" className="custom-select">
-        <option>Kategori</option>
+      <select
+        name="category"
+        id="category"
+        className="custom-select"
+        onChange={handleSelect}
+      >
+        <option value="">Kategori</option>
         <option value="utama">Utama</option>
         <option value="minuman">Minuman</option>
         <option value="snack">Snack</option>
