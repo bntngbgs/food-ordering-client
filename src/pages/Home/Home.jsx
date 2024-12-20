@@ -1,10 +1,7 @@
 import Tags from '../../components/Tags/Tags';
 import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
-// import burgerTestImage from '../../assets/burger.jpg';
-// import pizzaTestImage from '../../assets/pizza.jpg';
-// import coffeeTestImage from '../../assets/ice-coffee.jpg';
-import './Home.scss';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,24 +10,16 @@ import {
   incrementSkip,
   decrementSkip,
   selectPage,
+  addTags,
 } from '../../app/features/productsSlice';
-// import { userLogin } from '../../app/features/userSlice';
-import axios from 'axios';
+import './Home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { count, products, limit, skip, filteredCount, category } = useSelector(
     (state) => state.product
   );
-  // const [testProduct, setTestProduct] = useState([]);
   const [testTag, setTestTag] = useState([]);
-  // const [documentLength, setDocumentLength] = useState(0);
-  // const [requestQuery, setRequestQuery] = useState({
-  //   limitPerPage: 8,
-  //   skippedPage: 0,
-  // });
-
-  // console.log(limit);
 
   useEffect(() => {
     const getProductData = async () => {
@@ -44,11 +33,6 @@ const Home = () => {
         }
 
         dispatch(addAllProducts(product.data.data));
-        // dispatch(setFilteredCount(0));
-
-        // setTestProduct(product.data.data);
-        // setDocumentLength(product.data.count);
-        // console.log(product);
       } catch (error) {
         console.log(error);
       }
@@ -72,15 +56,10 @@ const Home = () => {
   }, []);
 
   const handleCountPaginate = (e) => {
-    // `http://localhost:3000/api/products?limit=${requestQuery.limitPerPage}&skip=${requestQuery.skippedPage}`
     let currentPage = parseInt(e.target.innerText);
 
     if (e.target.id) {
       if (e.target.id === 'decrement' && skip > 0) {
-        // setRequestQuery((prevState) => ({
-        //   ...prevState,
-        //   skippedPage: requestQuery.skippedPage - requestQuery.limitPerPage,
-        // }));
         dispatch(decrementSkip());
       }
 
@@ -89,27 +68,26 @@ const Home = () => {
         skip + products.length < count &&
         filteredCount == 0
       ) {
-        // setRequestQuery((prevState) => ({
-        //   ...prevState,
-        //   skippedPage: requestQuery.skippedPage + requestQuery.limitPerPage,
-        // }));
         dispatch(incrementSkip());
       }
       return;
     }
 
-    // setRequestQuery((prevState) => ({
-    //   ...prevState,
-    //   skippedPage: (currentPage - 1) * requestQuery.limitPerPage,
-    // }));
-
     dispatch(selectPage(currentPage - 1));
+  };
+
+  const handleClick = (e) => {
+    console.log(e.target);
+
+    if (e.target.classList.contains('tag-wrapper')) return;
+    e.target.classList.add('active');
+    dispatch(addTags(e.target.innerText));
   };
 
   return (
     <section className="home">
       <h1>Home</h1>
-      <div className="tag-wrapper">
+      <div className="tag-wrapper" onClick={handleClick}>
         <span>Tags : </span>
         {testTag.map((item, index) => (
           <Tags name={item.name} key={index} />
@@ -126,19 +104,8 @@ const Home = () => {
             tags={item.tags}
           />
         ))}
-        {/* <Card img={burgerTestImage} title="Hamburger" />
-        <Card img={pizzaTestImage} title="Pizza" />
-        <Card img={coffeeTestImage} title="Ice Coffee" />
-        <Card img={pizzaTestImage} title="Pizza" />
-        <Card img={coffeeTestImage} title="Ice Coffee" />
-        <Card img={burgerTestImage} title="Hamburger" /> */}
       </div>
-      <Pagination
-        dataCount={count}
-        dataPerPage={limit}
-        skippedPage={skip}
-        handleCountPaginate={handleCountPaginate}
-      />
+      <Pagination handleCountPaginate={handleCountPaginate} />
     </section>
   );
 };

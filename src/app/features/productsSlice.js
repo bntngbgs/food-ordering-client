@@ -7,6 +7,7 @@ const initialState = {
   count: 0,
   filteredCount: 0,
   category: '',
+  tags: [],
 };
 
 const productSlice = createSlice({
@@ -40,6 +41,9 @@ const productSlice = createSlice({
       state.category = action.payload;
       state.skip = 0;
     },
+    addTags: (state, action) => {
+      state.tags.push(action.payload);
+    },
   },
 });
 
@@ -52,6 +56,7 @@ export const {
   setFilteredCount,
   setGlobalCount,
   addCategory,
+  addTags,
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -8,7 +8,7 @@ import productsReducer from './features/productsSlice';
 const productsPersistConfig = {
   key: 'product',
   storage,
-  blacklist: ['category', 'skip'],
+  blacklist: ['category', 'skip', 'tags'],
   version: 1,
 };
 
