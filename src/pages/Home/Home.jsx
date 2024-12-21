@@ -11,24 +11,29 @@ import {
   decrementSkip,
   selectPage,
   addTags,
+  removeTags,
 } from '../../app/features/productsSlice';
 import './Home.scss';
 
 const Home = () => {
+  const { count, products, limit, skip, filteredCount, category, tags } =
+    useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const { count, products, limit, skip, filteredCount, category } = useSelector(
-    (state) => state.product
-  );
   const [testTag, setTestTag] = useState([]);
+  // const [tagQuery, setTagQuery] = useState('');
 
   useEffect(() => {
+    let tagq = tags.map((tag) => `&tags[]=${tag}`).join('');
+
+    console.log(tagq);
+
     const getProductData = async () => {
       try {
         const product = await axios.get(
-          `http://localhost:3000/api/products?limit=${limit}&skip=${skip}&category=${category}`
+          `http://localhost:3000/api/products?limit=${limit}&skip=${skip}&category=${category}${tagq}`
         );
 
-        if (category == '') {
+        if (category == '' || tags.length == 0) {
           dispatch(setDocumentLength(product.data.count));
         }
 
@@ -39,7 +44,7 @@ const Home = () => {
     };
 
     getProductData();
-  }, [limit, skip, dispatch, category]);
+  }, [limit, skip, dispatch, category, tags]);
 
   useEffect(() => {
     const getTagData = async () => {
@@ -77,11 +82,18 @@ const Home = () => {
   };
 
   const handleClick = (e) => {
-    console.log(e.target);
-
     if (e.target.classList.contains('tag-wrapper')) return;
+
+    if (e.target.classList.contains('active')) {
+      dispatch(removeTags(e.target.innerText));
+      return e.target.classList.remove('active');
+    }
+
     e.target.classList.add('active');
     dispatch(addTags(e.target.innerText));
+
+    // setTagQuery((prevState) => (prevState += `&tags[]=${e.target.innerText}`));
+    // setTagQuery(tags.map((tag) => `&tags[]=${tag}`));
   };
 
   return (

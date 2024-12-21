@@ -44,6 +44,9 @@ const productSlice = createSlice({
     addTags: (state, action) => {
       state.tags.push(action.payload);
     },
+    removeTags: (state, action) => {
+      state.tags = state.tags.filter((tag) => tag !== action.payload);
+    },
   },
 });
 
@@ -57,6 +60,7 @@ export const {
   setGlobalCount,
   addCategory,
   addTags,
+  removeTags,
 } = productSlice.actions;
 
 export default productSlice.reducer;
