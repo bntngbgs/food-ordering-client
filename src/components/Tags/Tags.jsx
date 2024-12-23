@@ -1,4 +1,4 @@
-// import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import tag from '../../assets/tag.png';
 import './Tags.scss';
 // import { addTags } from '../../app/features/productsSlice';

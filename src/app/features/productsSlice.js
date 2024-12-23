@@ -8,6 +8,7 @@ const initialState = {
   filteredCount: 0,
   category: '',
   tags: [],
+  searchQuery: '',
 };
 
 const productSlice = createSlice({
@@ -16,7 +17,6 @@ const productSlice = createSlice({
   reducers: {
     addAllProducts: (state, action) => {
       state.products = action.payload;
-      // state.skip = 0;
     },
     setDocumentLength: (state, action) => {
       state.count = action.payload;
@@ -41,11 +41,23 @@ const productSlice = createSlice({
       state.category = action.payload;
       state.skip = 0;
     },
+    clearCategory: (state) => {
+      state.category = '';
+    },
     addTags: (state, action) => {
       state.tags.push(action.payload);
     },
     removeTags: (state, action) => {
       state.tags = state.tags.filter((tag) => tag !== action.payload);
+    },
+    clearTags: (state) => {
+      state.tags = [];
+    },
+    addSearch: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+    clearSearch: (state) => {
+      state.searchQuery = '';
     },
   },
 });
@@ -59,8 +71,12 @@ export const {
   setFilteredCount,
   setGlobalCount,
   addCategory,
+  clearCategory,
   addTags,
   removeTags,
+  clearTags,
+  addSearch,
+  clearSearch,
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -14,9 +14,9 @@ const Navbar = () => {
   return (
     <header className="header">
       <nav className="navbar">
-        <Link to="/">
+        <a href="/">
           <img src={logo} alt="logo" className="logo" />
-        </Link>
+        </a>
         <CategorySelect />
         <SearchBar />
         <Link to="/cart">

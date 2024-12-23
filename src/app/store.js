@@ -4,11 +4,12 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './features/userSlice';
 import deliveryAddressReducer from './features/deliveryAddressSlice';
 import productsReducer from './features/productsSlice';
+import cartReducer from './features/cartSlice';
 
 const productsPersistConfig = {
   key: 'product',
   storage,
-  blacklist: ['category', 'skip', 'tags'],
+  blacklist: ['category', 'skip', 'tags', 'count', 'searchQuery'],
   version: 1,
 };
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   deliveryAddress: deliveryAddressReducer,
   product: persistReducer(productsPersistConfig, productsReducer),
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

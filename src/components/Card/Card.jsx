@@ -1,9 +1,21 @@
 import Tags from '../Tags/Tags';
 import cartPlus from '../../assets/cart-plus.png';
 import './Card.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, toogleModal } from '../../app/features/cartSlice';
 
 const Card = ({ img, title, price, category, tags }) => {
-  // console.log(img);
+  const { role } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    if (role == 'guest') {
+      return dispatch(toogleModal(true));
+    }
+
+    dispatch(addToCart({ img, title, price }));
+  };
+
   return (
     <div className="card">
       <img
@@ -23,7 +35,7 @@ const Card = ({ img, title, price, category, tags }) => {
         <div className="price">
           <p>Rp. {price.toLocaleString('id-ID')}</p>
         </div>
-        <button className="cart-plus-button">
+        <button className="cart-plus-button" onClick={handleClick}>
           <img src={cartPlus} className="cart-plus-icon" />
         </button>
       </div>

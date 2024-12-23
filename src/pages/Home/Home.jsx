@@ -1,6 +1,7 @@
 import Tags from '../../components/Tags/Tags';
 import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
+import NotAuthModal from '../../components/notAuthModal/NotAuthModal';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,28 +13,41 @@ import {
   selectPage,
   addTags,
   removeTags,
+  setGlobalCount,
+  clearCategory,
 } from '../../app/features/productsSlice';
 import './Home.scss';
 
 const Home = () => {
-  const { count, products, limit, skip, filteredCount, category, tags } =
-    useSelector((state) => state.product);
+  const {
+    count,
+    products,
+    limit,
+    skip,
+    filteredCount,
+    category,
+    tags,
+    searchQuery,
+  } = useSelector((state) => state.product);
+  const { showModal } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [testTag, setTestTag] = useState([]);
   // const [tagQuery, setTagQuery] = useState('');
 
   useEffect(() => {
-    let tagq = tags.map((tag) => `&tags[]=${tag}`).join('');
+    let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
 
-    console.log(tagq);
+    if (tags.length > 0) {
+      getTagResultLength();
+    }
 
     const getProductData = async () => {
       try {
         const product = await axios.get(
-          `http://localhost:3000/api/products?limit=${limit}&skip=${skip}&category=${category}${tagq}`
+          `http://localhost:3000/api/products?q=${searchQuery}&limit=${limit}&skip=${skip}&category=${category}${tagQuery}`
         );
 
-        if (category == '' || tags.length == 0) {
+        if (category == '' && tags.length == 0) {
           dispatch(setDocumentLength(product.data.count));
         }
 
@@ -44,7 +58,7 @@ const Home = () => {
     };
 
     getProductData();
-  }, [limit, skip, dispatch, category, tags]);
+  }, [limit, skip, dispatch, category, tags, searchQuery]);
 
   useEffect(() => {
     const getTagData = async () => {
@@ -75,31 +89,55 @@ const Home = () => {
       ) {
         dispatch(incrementSkip());
       }
+
       return;
     }
 
     dispatch(selectPage(currentPage - 1));
   };
 
-  const handleClick = (e) => {
+  const handleClickTags = async (e) => {
     if (e.target.classList.contains('tag-wrapper')) return;
+
+    dispatch(clearCategory());
 
     if (e.target.classList.contains('active')) {
       dispatch(removeTags(e.target.innerText));
       return e.target.classList.remove('active');
     }
-
-    e.target.classList.add('active');
     dispatch(addTags(e.target.innerText));
 
+    e.target.classList.add('active');
+
+    let query = tags.map((tag) => `&tags[]=${tag}`).join('');
+
+    console.log(query);
+
+    const resultLength = await axios.get(
+      `http://localhost:3000/api/products?${query}`
+    );
+
+    console.log(resultLength);
+
+    dispatch(setGlobalCount(resultLength.data.data));
     // setTagQuery((prevState) => (prevState += `&tags[]=${e.target.innerText}`));
     // setTagQuery(tags.map((tag) => `&tags[]=${tag}`));
   };
 
+  const getTagResultLength = async () => {
+    let query = tags.map((tag) => `&tags[]=${tag}`).join('');
+    const resultLength = await axios.get(
+      `http://localhost:3000/api/products?tags[]=${query}&limit=${0}`
+    );
+
+    dispatch(setGlobalCount(resultLength.data.data));
+  };
+
   return (
     <section className="home">
+      {showModal && <NotAuthModal />}
       <h1>Home</h1>
-      <div className="tag-wrapper" onClick={handleClick}>
+      <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>
         {testTag.map((item, index) => (
           <Tags name={item.name} key={index} />

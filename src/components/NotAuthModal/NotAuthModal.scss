@@ -1,0 +1,50 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: grid;
+  place-items: center;
+
+  .modal-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    padding: 3rem 3rem 1.75rem 3rem;
+    border-radius: 8px;
+
+    p {
+      margin-top: 0.15rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .button-modal-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+
+    button {
+      flex: 1;
+      width: 100%;
+    }
+
+    a {
+      flex: 1;
+    }
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+  }
+}

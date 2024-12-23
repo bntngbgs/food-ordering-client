@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { FaChevronRight } from 'react-icons/fa';
 import { TbLogout } from 'react-icons/tb';
 import './ProfileLayout.scss';
+import { clearCart } from '../app/features/cartSlice';
 
 const ProfileLayout = () => {
   const { id } = useSelector((state) => state.user);
@@ -19,6 +20,7 @@ const ProfileLayout = () => {
       autoClose: 1000,
     });
 
+    dispatch(clearCart());
     dispatch(userLogout());
     dispatch(removeWhenLogout());
 
