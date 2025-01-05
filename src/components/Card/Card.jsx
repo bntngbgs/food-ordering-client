@@ -3,6 +3,7 @@ import cartPlus from '../../assets/cart-plus.png';
 import './Card.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, toogleModal } from '../../app/features/cartSlice';
+import { toast } from 'react-toastify';
 
 const Card = ({ img, title, price, category, tags }) => {
   const { role } = useSelector((state) => state.user);
@@ -13,7 +14,8 @@ const Card = ({ img, title, price, category, tags }) => {
       return dispatch(toogleModal(true));
     }
 
-    dispatch(addToCart({ img, title, price }));
+    toast.success('Berhasil menambahkan item!', { autoClose: 1000 });
+    dispatch(addToCart({ img, title, price, qty: 1 }));
   };
 
   return (

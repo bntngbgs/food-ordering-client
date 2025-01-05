@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   cart: [],
   isAuth: false,
-  total: 0,
+  totalPrice: 0,
+  itemCount: 0,
   showModal: false,
-  badgeCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -16,13 +16,39 @@ const cartSlice = createSlice({
       state.showModal = action.payload;
     },
     addToCart: (state, action) => {
-      state.cart.push(action.payload);
-      state.badgeCount += 1;
+      if (state.cart.some((item) => item.title === action.payload.title)) {
+        let targetItem = state.cart.find(
+          (item) => item.title === action.payload.title
+        );
+
+        targetItem.qty += 1;
+      } else {
+        state.cart.push(action.payload);
+        state.itemCount = state.cart.length;
+      }
+    },
+    incrementQty: (state, action) => {
+      let targetItem = state.cart.find((item) => item.title === action.payload);
+
+      targetItem.qty++;
+    },
+    decrementQty: (state, action) => {
+      let targetItem = state.cart.find((item) => item.title === action.payload);
+
+      targetItem.qty--;
+
+      if (targetItem.qty == 0) {
+        state.cart = state.cart.filter(
+          (item) => item.title !== targetItem.title
+        );
+        state.itemCount = state.cart.length;
+      }
     },
     clearCart: () => initialState,
   },
 });
 
-export const { toogleModal, addToCart, clearCart } = cartSlice.actions;
+export const { toogleModal, addToCart, incrementQty, decrementQty, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

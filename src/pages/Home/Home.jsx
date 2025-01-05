@@ -32,7 +32,6 @@ const Home = () => {
   const { showModal } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [testTag, setTestTag] = useState([]);
-  // const [tagQuery, setTagQuery] = useState('');
 
   useEffect(() => {
     let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
@@ -120,8 +119,6 @@ const Home = () => {
     console.log(resultLength);
 
     dispatch(setGlobalCount(resultLength.data.data));
-    // setTagQuery((prevState) => (prevState += `&tags[]=${e.target.innerText}`));
-    // setTagQuery(tags.map((tag) => `&tags[]=${tag}`));
   };
 
   const getTagResultLength = async () => {
