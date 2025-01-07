@@ -1,64 +1,55 @@
 import { useSelector } from 'react-redux';
 import CardItem from '../../components/CartItem/CartItem';
-// import burgerImage from '../../assets/burger.jpg';
 import Button from '../../components/Button/Button';
 
 import './Cart.scss';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, totalPrice } = useSelector((state) => state.cart);
+  const { token } = useSelector((state) => state.user);
+  let navigate = useNavigate();
+
+  const handleUpdateCart = async () => {
+    let savedCart = await axios.put('http://localhost:3000/api/carts', cart, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    console.log(savedCart);
+
+    navigate('/checkout/address');
+  };
 
   return (
     <section className="cart-page">
       <h1>Home {'>'} Cart</h1>
-      <h2>Sub Total : Rp. 64.000</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Gambar</th>
-            <th>Barang</th>
-            <th>Harga</th>
-            <th align="center">Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cart &&
-            cart.map((item, index) => <CardItem key={index} {...item} />)}
-          {/* <tr>
-            <td>
-              <img src={burgerImage} alt="burger" className="table-image" />
-            </td>
-            <td>
-              <p>Triple Burger</p>
-            </td>
-            <td>
-              <p>Rp. 30.000</p>
-            </td>
-            <td align="center">
-              <span>-</span>
-              <span>1</span>
-              <span>+</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src={burgerImage} alt="burger" className="table-image" />
-            </td>
-            <td>
-              <p>Triple Burger</p>
-            </td>
-            <td>
-              <p>Rp. 30.000</p>
-            </td>
-            <td align="center">
-              <span>-</span>
-              <span>1</span>
-              <span>+</span>
-            </td>
-          </tr> */}
-        </tbody>
-      </table>
-      <Button variant="outline-reversed" text="Checkout" />
+      <h2>Sub Total : Rp. {Intl.NumberFormat('id-ID').format(totalPrice)}</h2>
+      {cart.length === 0 ? (
+        <p className="cart-empty">Belum ada produk.</p>
+      ) : (
+        <div className="cart-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Gambar</th>
+                <th>Barang</th>
+                <th>Harga</th>
+                <th align="center">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart &&
+                cart.map((item, index) => <CardItem key={index} {...item} />)}
+            </tbody>
+          </table>
+          <Button
+            variant="outline-reversed"
+            text="Checkout"
+            handleClick={handleUpdateCart}
+          />
+        </div>
+      )}
     </section>
   );
 };

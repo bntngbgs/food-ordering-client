@@ -3,6 +3,14 @@
   margin-inline: auto;
   margin-top: 2rem;
 
+  .cart-empty {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    color: grey;
+  }
+
   h1 {
     color: lightslategrey;
     font-weight: normal;

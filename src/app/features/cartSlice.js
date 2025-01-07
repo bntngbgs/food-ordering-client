@@ -45,10 +45,23 @@ const cartSlice = createSlice({
       }
     },
     clearCart: () => initialState,
+    countTotal: (state) => {
+      let total = state.cart.map((item) => item.price * item.qty);
+      // console.log(total);
+      state.totalPrice = total.reduce((prev, curr) => {
+        return prev + curr;
+      }, 0);
+    },
   },
 });
 
-export const { toogleModal, addToCart, incrementQty, decrementQty, clearCart } =
-  cartSlice.actions;
+export const {
+  toogleModal,
+  addToCart,
+  incrementQty,
+  decrementQty,
+  clearCart,
+  countTotal,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

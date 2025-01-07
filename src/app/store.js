@@ -19,6 +19,7 @@ const rootPersistConfig = {
   blacklist: ['product'],
   version: 1,
 };
+1;
 
 const rootReducer = combineReducers({
   user: userReducer,

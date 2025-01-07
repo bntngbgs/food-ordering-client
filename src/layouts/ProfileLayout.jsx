@@ -7,8 +7,8 @@ import { removeWhenLogout } from '../app/features/deliveryAddressSlice';
 import { toast } from 'react-toastify';
 import { FaChevronRight } from 'react-icons/fa';
 import { TbLogout } from 'react-icons/tb';
-import './ProfileLayout.scss';
 import { clearCart } from '../app/features/cartSlice';
+import './ProfileLayout.scss';
 
 const ProfileLayout = () => {
   const { id } = useSelector((state) => state.user);
@@ -59,4 +59,5 @@ const ProfileLayout = () => {
     </div>
   );
 };
+
 export default ProfileLayout;

@@ -1,5 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { decrementQty, incrementQty } from '../../app/features/cartSlice';
+import {
+  decrementQty,
+  incrementQty,
+  countTotal,
+} from '../../app/features/cartSlice';
 import './CartItem.scss';
 
 const CartItem = ({ img, title, price, qty }) => {
@@ -7,10 +11,12 @@ const CartItem = ({ img, title, price, qty }) => {
 
   const handleIncrement = () => {
     dispatch(incrementQty(title));
+    dispatch(countTotal());
   };
 
   const handleDecrement = () => {
     dispatch(decrementQty(title));
+    dispatch(countTotal());
   };
 
   return (
@@ -18,7 +24,7 @@ const CartItem = ({ img, title, price, qty }) => {
       <td>
         <img
           src={`http://localhost:3000/images/products/${img}`}
-          alt="burger"
+          alt="food image"
           className="table-image"
         />
       </td>

@@ -14,6 +14,9 @@ import ProtectedRoutes from './components/utils/ProtectedRoutes';
 import ProfileLayout from './layouts/ProfileLayout';
 import OrderProfile from './components/OrderProfile/OrderProfile';
 import DeliveryAddress from './components/DeliveryAddress/DeliveryAddress';
+import CheckoutLayout from './layouts/CheckoutLayout';
+import CheckoutAddress from './components/CheckoutAddress/CheckoutAddress';
+import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +27,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckoutLayout />}>
+            <Route path="address" element={<CheckoutAddress />} />
+            <Route path="confirm" element={<ConfirmOrder />} />
+          </Route>
           <Route path="/user" element={<ProfileLayout />}>
             <Route path="profile" element={<Profile />} />
             <Route path="order" element={<OrderProfile />} />

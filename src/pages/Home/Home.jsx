@@ -33,6 +33,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const [testTag, setTestTag] = useState([]);
 
+  // Effects for get the displayed product data
   useEffect(() => {
     let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
 
@@ -59,6 +60,7 @@ const Home = () => {
     getProductData();
   }, [limit, skip, dispatch, category, tags, searchQuery]);
 
+  // Effects for get all the displayed tag data
   useEffect(() => {
     const getTagData = async () => {
       try {
@@ -110,8 +112,6 @@ const Home = () => {
 
     let query = tags.map((tag) => `&tags[]=${tag}`).join('');
 
-    console.log(query);
-
     const resultLength = await axios.get(
       `http://localhost:3000/api/products?${query}`
     );
@@ -144,6 +144,7 @@ const Home = () => {
         {products.map((item, index) => (
           <Card
             key={index}
+            product_id={item._id}
             img={item.image_url}
             title={item.name}
             price={item.price}
