@@ -1,29 +1,30 @@
 import { useSelector } from 'react-redux';
 import CardItem from '../../components/CartItem/CartItem';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Button from '../../components/Button/Button';
 
 import './Cart.scss';
-import axios from 'axios';
+// import axios from 'axios';
 import { useNavigate } from 'react-router';
 
 const Cart = () => {
   const { cart, totalPrice } = useSelector((state) => state.cart);
-  const { token } = useSelector((state) => state.user);
+  // const { token } = useSelector((state) => state.user);
   let navigate = useNavigate();
 
   const handleUpdateCart = async () => {
-    let savedCart = await axios.put('http://localhost:3000/api/carts', cart, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    // let savedCart = await axios.put('http://localhost:3000/api/carts', cart, {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // });
 
-    console.log(savedCart);
+    // console.log(savedCart);
 
     navigate('/checkout/address');
   };
 
   return (
     <section className="cart-page">
-      <h1>Home {'>'} Cart</h1>
+      <Breadcrumbs />
       <h2>Sub Total : Rp. {Intl.NumberFormat('id-ID').format(totalPrice)}</h2>
       {cart.length === 0 ? (
         <p className="cart-empty">Belum ada produk.</p>

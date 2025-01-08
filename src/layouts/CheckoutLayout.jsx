@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router';
+import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs';
+import './CheckoutLayout.scss';
 
 const CheckoutLayout = () => {
   return (
-    <div>
-      <h1>CheckoutLayout</h1>
+    <div className="checkout-wrapper">
+      <Breadcrumbs />
       <Outlet />
     </div>
   );
