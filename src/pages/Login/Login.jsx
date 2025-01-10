@@ -8,7 +8,6 @@ import { PiWarningCircleLight } from 'react-icons/pi';
 import Button from '../../components/Button/Button';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
-import { addAddress } from '../../app/features/deliveryAddressSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -68,7 +67,12 @@ const Login = () => {
       // dispatch(userLogin(userWithToken));
 
       dispatch(userLogin(userWithToken));
-      dispatch(addAddress());
+      // let getAddressData = await axios.get(
+      //   'http://localhost:3000/api/delivery-address',
+      //   { headers: { Authorization: `Bearer ${token}` } }
+      // );
+
+      // console.log(getAddressData);
       setTimeout(() => {
         navigate('/');
       }, 1000);

@@ -3,7 +3,7 @@
 
   .address-table {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     border-collapse: collapse;
 
     thead {
@@ -43,6 +43,7 @@
           transform: translateY(-0.065em);
           display: grid;
           place-content: center;
+          cursor: pointer;
         }
 
         input[type='checkbox']::before {
@@ -68,5 +69,44 @@
         }
       }
     }
+  }
+
+  .checkout-button-wrapper {
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+
+    button {
+      margin-left: auto;
+      transition: all 0.3s ease;
+
+      &:hover:enabled {
+        background-color: #fa4032;
+        color: white;
+      }
+    }
+  }
+}
+
+.checkout-address-empty {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    color: lightgray;
+    margin-bottom: 0.75rem;
+  }
+
+  a {
+    display: block;
+    border-radius: 6px;
+    background-color: #ffb200;
+    padding: 0.45rem 0.75rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
   }
 }

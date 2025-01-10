@@ -28,7 +28,7 @@ const AddressForm = () => {
     const getWilayahApi = async () => {
       try {
         let response = await axios.get(
-          `https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json`
+          `https://bntngbgs.github.io/api-wilayah-indonesia/api/provinces.json`
         );
 
         setWilayah((prev) => ({ ...prev, provinsi: response.data }));
@@ -47,7 +47,7 @@ const AddressForm = () => {
     const getWilayahApi = async () => {
       try {
         let response = await axios.get(
-          `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
+          `https://bntngbgs.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
         );
 
         setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
@@ -65,7 +65,7 @@ const AddressForm = () => {
     const getWilayahApi = async () => {
       try {
         let response = await axios.get(
-          `https://emsifa.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
+          `https://bntngbgs.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
         );
 
         setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
@@ -83,7 +83,7 @@ const AddressForm = () => {
     const getWilayahApi = async () => {
       try {
         let response = await axios.get(
-          `https://emsifa.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
+          `https://bntngbgs.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
         );
 
         setWilayah((prev) => ({ ...prev, kelurahan: response.data }));

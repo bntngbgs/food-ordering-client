@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   address: [],
+  selectedAddress: [],
   toggleForm: false,
 };
 
@@ -13,13 +14,16 @@ const deliveryAddressSlice = createSlice({
       state.address = [...state.address, action.payload];
       state.toggleForm = false;
     },
-    toggleAddressForm: (state) => {
-      state.toggleForm = !state.toggleForm;
+    toggleAddressForm: (state, action) => {
+      state.toggleForm = action.payload;
     },
     fetchWhenLogin: (state, action) => {
       state.address = action.payload.data;
     },
     removeWhenLogout: () => initialState,
+    setCheckoutAddress: (state, action) => {
+      state.selectedAddress = action.payload;
+    },
   },
 });
 
@@ -28,6 +32,7 @@ export const {
   toggleAddressForm,
   removeWhenLogout,
   fetchWhenLogin,
+  setCheckoutAddress,
 } = deliveryAddressSlice.actions;
 
 export default deliveryAddressSlice.reducer;

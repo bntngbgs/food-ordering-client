@@ -34,11 +34,11 @@ const DeliveryAddress = () => {
     <div className="address-profile">
       <button
         className="add-address"
-        onClick={() => dispatch(toggleAddressForm())}
+        onClick={() => dispatch(toggleAddressForm(!toggleForm))}
       >
         Tambah Alamat
       </button>
-      {address && !toggleForm && (
+      {address.length > 0 && !toggleForm && (
         <table>
           <thead>
             <tr>
@@ -48,7 +48,7 @@ const DeliveryAddress = () => {
           </thead>
 
           <tbody>
-            {address.length > 1 &&
+            {address.length > 0 &&
               address.map((item, index) => (
                 <tr key={index}>
                   <td>{item.nama}</td>
@@ -58,8 +58,8 @@ const DeliveryAddress = () => {
           </tbody>
         </table>
       )}{' '}
-      {!address && !toggleForm && (
-        <p className="empty-address">Anda belum memiliki alamat</p>
+      {address.length < 1 && !toggleForm && (
+        <p className="empty-address">Anda belum memiliki alamat pengiriman.</p>
       )}
       {toggleForm && <AddressForm />}
     </div>

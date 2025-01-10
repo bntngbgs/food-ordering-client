@@ -1,0 +1,31 @@
+.confirm-order-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+
+  tr {
+    &:first-child {
+      border-top: 1px solid #fa4032;
+    }
+
+    &:last-child {
+      font-weight: 700;
+    }
+  }
+
+  td {
+    font-size: 1.15rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #fa4032;
+  }
+}
+
+.confirm-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  & button:last-child {
+    font-weight: 700;
+  }
+}
