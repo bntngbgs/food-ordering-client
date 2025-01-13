@@ -3,10 +3,10 @@ import SearchBar from '../SearchBar/SearchBar';
 import CartButton from '../CartButton/CartButton';
 import Button from '../Button/Button';
 import logo from '../../assets/logo.png';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router';
 import { FaUserCircle } from 'react-icons/fa';
 import './Navbar.scss';
-import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const { full_name } = useSelector((state) => state.user);

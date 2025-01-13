@@ -17,6 +17,7 @@ import DeliveryAddress from './components/DeliveryAddress/DeliveryAddress';
 import CheckoutLayout from './layouts/CheckoutLayout';
 import CheckoutAddress from './components/CheckoutAddress/CheckoutAddress';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
+import Invoice from './components/Invoice/Invoice';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/checkout" element={<CheckoutLayout />}>
             <Route path="address" element={<CheckoutAddress />} />
             <Route path="confirm" element={<ConfirmOrder />} />
+            <Route path="invoice" element={<Invoice />} />
           </Route>
           <Route path="/user" element={<ProfileLayout />}>
             <Route path="profile" element={<Profile />} />

@@ -1,5 +1,5 @@
-import './Profile.scss';
 import { useSelector } from 'react-redux';
+import './Profile.scss';
 
 const Profile = () => {
   const { customer_id, full_name, email } = useSelector((state) => state.user);

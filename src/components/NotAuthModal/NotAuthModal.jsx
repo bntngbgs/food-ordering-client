@@ -1,10 +1,10 @@
+import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import './NotAuthModal.scss';
+import { NavLink } from 'react-router';
+import { toogleModal } from '../../app/features/cartSlice';
 import { IoClose } from 'react-icons/io5';
 import { IoWarning } from 'react-icons/io5';
-import { toogleModal } from '../../app/features/cartSlice';
-import Button from '../Button/Button';
-import { NavLink } from 'react-router';
+import './NotAuthModal.scss';
 
 const NotAuthModal = () => {
   const dispatch = useDispatch();

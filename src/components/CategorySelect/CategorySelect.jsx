@@ -1,13 +1,11 @@
 import axios from 'axios';
+import arrowDown from '../../assets/arrow-down.png';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addCategory,
   clearTags,
-  // addAllProducts,
-  // setFilteredCount,
   setGlobalCount,
 } from '../../app/features/productsSlice';
-import arrowDown from '../../assets/arrow-down.png';
 import './CategorySelect.scss';
 
 const CategorySelect = () => {
@@ -21,23 +19,12 @@ const CategorySelect = () => {
         `http://localhost:3000/api/products?category=${selectedOption}`
       );
 
-      // const product = await axios.get(
-      //   `http://localhost:3000/api/products?category=${selectedOption}&limit=${limit}`
-      // );
-
-      // dispatch(addAllProducts(product.data.data));
-      // dispatch(setFilteredCount(product.data.data));
       dispatch(setGlobalCount(productLength.data.data));
       dispatch(addCategory(selectedOption));
       dispatch(clearTags());
       document
         .querySelectorAll('.active')
         .forEach((item) => item.classList.remove('active'));
-      // dispatch(setDocumentLength(product.data.data));
-
-      // setTestProduct(product.data.data);
-      // setDocumentLength(product.data.count);
-      // console.log(product);
     } catch (error) {
       console.log(error);
     }

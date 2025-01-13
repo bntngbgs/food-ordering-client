@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   token: '',
   id: '',
+  currentOrderId: '',
 };
 
 const userSlice = createSlice({
@@ -25,6 +26,9 @@ const userSlice = createSlice({
       state.token = action.payload.token;
     },
     userLogout: () => initialState,
+    setCurrentOrderId: (state, action) => {
+      state.currentOrderId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(REHYDRATE, (state, action) => {
@@ -41,6 +45,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { userLogin, userLogout } = userSlice.actions;
+export const { userLogin, userLogout, setCurrentOrderId } = userSlice.actions;
 
 export default userSlice.reducer;

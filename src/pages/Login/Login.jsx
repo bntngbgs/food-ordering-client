@@ -1,11 +1,11 @@
 import axios from 'axios';
+import Button from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { userLogin } from '../../app/features/userSlice';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { PiWarningCircleLight } from 'react-icons/pi';
-import Button from '../../components/Button/Button';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
 
@@ -51,8 +51,6 @@ const Login = () => {
         return setAuthError(user.data.message);
       }
 
-      // console.log(user);
-
       toast.success(user.data.message, {
         autoClose: 1000,
       });
@@ -62,17 +60,7 @@ const Login = () => {
         token: user.data.token,
       };
 
-      // console.log(userWithToken);
-      // localStorage.setItem('user', JSON.stringify(userWithToken));
-      // dispatch(userLogin(userWithToken));
-
       dispatch(userLogin(userWithToken));
-      // let getAddressData = await axios.get(
-      //   'http://localhost:3000/api/delivery-address',
-      //   { headers: { Authorization: `Bearer ${token}` } }
-      // );
-
-      // console.log(getAddressData);
       setTimeout(() => {
         navigate('/');
       }, 1000);
@@ -92,7 +80,6 @@ const Login = () => {
         </div>
       )}
       <form className="login-form" onSubmit={handleLogin}>
-        {/* <label htmlFor="emal">Email :</label> */}
         <input
           type="email"
           id="email"
@@ -114,7 +101,6 @@ const Login = () => {
             <p>{validationError.email}</p>
           </div>
         )}
-        {/* <label htmlFor="emal">Password :</label> */}
         <input
           type="password"
           id="password"

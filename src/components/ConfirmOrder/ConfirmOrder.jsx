@@ -1,18 +1,70 @@
-import { useSelector } from 'react-redux';
+import axios from 'axios';
 import Button from '../Button/Button';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { setCheckoutAddress } from '../../app/features/deliveryAddressSlice';
+import { setCurrentOrderId } from '../../app/features/userSlice';
+import { clearCart } from '../../app/features/cartSlice';
 import './ConfirmOrder.scss';
 
 const ConfirmOrder = () => {
+  const [finalAddress, setFinalAddress] = useState({
+    name: '',
+    id: '',
+  });
   const { address, selectedAddress } = useSelector(
     (state) => state.deliveryAddress
   );
+  const { token } = useSelector((state) => state.user);
+  const { cart } = useSelector((state) => state.cart);
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   const { totalPrice } = useSelector((state) => state.cart);
 
-  let finalAddress = address.filter((item) => item._id === selectedAddress);
+  const handleClickPrevious = () => {
+    navigate('/checkout/address');
+  };
 
-  let [{ detail, provinsi, kabupaten, kecamatan, kelurahan }] = finalAddress;
-  console.log(finalAddress);
+  useEffect(() => {
+    let addressData = address.filter((item) => item._id === selectedAddress);
+
+    let [{ detail, provinsi, kabupaten, kecamatan, kelurahan, _id }] =
+      addressData;
+
+    let formattedAddress = `${provinsi}, ${kabupaten}, ${kecamatan}, ${kelurahan}, ${detail}`;
+
+    setFinalAddress({
+      name: formattedAddress,
+      id: _id,
+    });
+  }, []);
+
+  const handleConfirm = async () => {
+    try {
+      await axios.put('http://localhost:3000/api/carts', cart, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      let saveToOrder = await axios.post(
+        'http://localhost:3000/api/orders',
+        { delivery_fee: 20000, delivery_address: finalAddress.id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (saveToOrder.status === 200) {
+        dispatch(setCurrentOrderId(saveToOrder.data._id));
+        dispatch(setCheckoutAddress(finalAddress.name));
+        dispatch(clearCart());
+        navigate('/checkout/invoice');
+      }
+    } catch (error) {
+      console.log(error.stack);
+    }
+  };
 
   return (
     <div>
@@ -21,7 +73,7 @@ const ConfirmOrder = () => {
         <tbody>
           <tr>
             <td>Alamat</td>
-            <td>{`${provinsi}, ${kabupaten}, ${kecamatan}, ${kelurahan}, ${detail}`}</td>
+            <td>{finalAddress.name}</td>
           </tr>
           <tr>
             <td>Sub Total</td>
@@ -38,8 +90,16 @@ const ConfirmOrder = () => {
         </tbody>
       </table>
       <div className="confirm-button-wrapper">
-        <Button variant="filled-reversed" text="Sebelumnya" />
-        <Button variant="green-filled" text="BAYAR" />
+        <Button
+          variant="filled-reversed"
+          text="Sebelumnya"
+          handleClick={handleClickPrevious}
+        />
+        <Button
+          variant="green-filled"
+          text="BAYAR"
+          handleClick={handleConfirm}
+        />
       </div>
     </div>
   );

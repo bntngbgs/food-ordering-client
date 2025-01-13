@@ -1,8 +1,8 @@
+import axios from 'axios';
 import Tags from '../../components/Tags/Tags';
 import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
 import NotAuthModal from '../../components/notAuthModal/NotAuthModal';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -31,7 +31,7 @@ const Home = () => {
   } = useSelector((state) => state.product);
   const { showModal } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [testTag, setTestTag] = useState([]);
+  const [tagData, setTagData] = useState([]);
 
   // Effects for get the displayed product data
   useEffect(() => {
@@ -66,7 +66,7 @@ const Home = () => {
       try {
         const tags = await axios.get('http://localhost:3000/api/tags');
 
-        setTestTag(tags.data);
+        setTagData(tags.data);
       } catch (error) {
         console.log(error);
       }
@@ -116,8 +116,6 @@ const Home = () => {
       `http://localhost:3000/api/products?${query}`
     );
 
-    console.log(resultLength);
-
     dispatch(setGlobalCount(resultLength.data.data));
   };
 
@@ -136,24 +134,34 @@ const Home = () => {
       <h1>Home</h1>
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>
-        {testTag.map((item, index) => (
+        {tagData.map((item, index) => (
           <Tags name={item.name} key={index} />
         ))}
       </div>
-      <div className="card-wrapper">
-        {products.map((item, index) => (
-          <Card
-            key={index}
-            product_id={item._id}
-            img={item.image_url}
-            title={item.name}
-            price={item.price}
-            category={item.category.name}
-            tags={item.tags}
-          />
-        ))}
-      </div>
-      <Pagination handleCountPaginate={handleCountPaginate} />
+
+      {products.length < 1 ? (
+        <h1 className="empty-search">
+          Maaf, produk yang anda cari tidak dapat ditemukan.
+        </h1>
+      ) : (
+        <div className="card-wrapper">
+          {products.map((item, index) => (
+            <Card
+              key={index}
+              product_id={item._id}
+              img={item.image_url}
+              title={item.name}
+              price={item.price}
+              category={item.category.name}
+              tags={item.tags}
+            />
+          ))}
+        </div>
+      )}
+
+      {products.length > 1 && (
+        <Pagination handleCountPaginate={handleCountPaginate} />
+      )}
     </section>
   );
 };

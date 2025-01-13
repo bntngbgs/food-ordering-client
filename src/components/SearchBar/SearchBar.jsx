@@ -1,8 +1,8 @@
-import './SearchBar.scss';
 import searchIcon from '../../assets/search.png';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSearch, clearSearch } from '../../app/features/productsSlice';
+import './SearchBar.scss';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');

@@ -1,6 +1,6 @@
-import './CartButton.scss';
 import cartIcon from '../../assets/cart.png';
 import { useSelector } from 'react-redux';
+import './CartButton.scss';
 
 const CartButton = () => {
   const { itemCount } = useSelector((state) => state.cart);

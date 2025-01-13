@@ -1,10 +1,10 @@
+import axios from 'axios';
+import AddressForm from '../AddressForm/AddressForm';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
 import { fetchWhenLogin } from '../../app/features/deliveryAddressSlice';
-import AddressForm from '../AddressForm/AddressForm';
 import './DeliveryAddress.scss';
-import axios from 'axios';
 
 const DeliveryAddress = () => {
   const { address, toggleForm } = useSelector((state) => state.deliveryAddress);

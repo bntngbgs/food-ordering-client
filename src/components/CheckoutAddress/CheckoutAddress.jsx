@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import Button from '../Button/Button';
-import './CheckoutAddress.scss';
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import {
   toggleAddressForm,
   setCheckoutAddress,
   fetchWhenLogin,
 } from '../../app/features/deliveryAddressSlice';
-import axios from 'axios';
+import './CheckoutAddress.scss';
 
 const CheckoutAddress = () => {
   let { address } = useSelector((state) => state.deliveryAddress);
@@ -25,7 +25,6 @@ const CheckoutAddress = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        console.log(addressData.data.data);
         dispatch(fetchWhenLogin(addressData.data));
       } catch (error) {
         console.log(error);
@@ -42,6 +41,10 @@ const CheckoutAddress = () => {
   const handleClick = () => {
     dispatch(setCheckoutAddress(selectedAddress));
     navigate('/checkout/confirm');
+  };
+
+  const handleClickPrevious = () => {
+    navigate('/cart');
   };
 
   const handleAddAddress = () => {
@@ -88,6 +91,11 @@ const CheckoutAddress = () => {
       )}
       {address.length > 0 && (
         <div className="checkout-button-wrapper">
+          <Button
+            variant="filled-reversed"
+            text="Sebelumnya"
+            handleClick={handleClickPrevious}
+          />
           <Button
             variant="outline-reversed"
             text="Selanjutnya"

@@ -55,7 +55,6 @@ const AddressForm = () => {
         `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
       }
     };
-    console.log(id);
 
     getWilayahApi();
   }, [id.provinsi]);
@@ -73,7 +72,6 @@ const AddressForm = () => {
         `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
       }
     };
-    console.log(id);
 
     getWilayahApi();
   }, [id.kabupaten]);
@@ -91,7 +89,6 @@ const AddressForm = () => {
         `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
       }
     };
-    console.log(id);
 
     getWilayahApi();
   }, [id.kecamatan]);
@@ -106,7 +103,6 @@ const AddressForm = () => {
   });
 
   const handleChange = (e) => {
-    // console.log(e.target.type);
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -136,7 +132,6 @@ const AddressForm = () => {
       kelurahan: formData.kelurahan,
     };
 
-    // const {nama, alamat, provinsi, kabupaten, kecamatan, kelurahan} = formData;
     try {
       let response = await axios.post(
         'http://localhost:3000/api/delivery-address',

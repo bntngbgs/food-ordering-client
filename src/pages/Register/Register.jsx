@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router';
 import { PiWarningCircleLight } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import './Register.scss';
 
 const Register = () => {

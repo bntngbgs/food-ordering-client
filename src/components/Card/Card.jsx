@@ -1,13 +1,13 @@
 import Tags from '../Tags/Tags';
 import cartPlus from '../../assets/cart-plus.png';
-import './Card.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import {
   addToCart,
   toogleModal,
   countTotal,
 } from '../../app/features/cartSlice';
-import { toast } from 'react-toastify';
+import './Card.scss';
 
 const Card = ({ product_id, img, title, price, category, tags }) => {
   const { role, id } = useSelector((state) => state.user);
@@ -17,8 +17,6 @@ const Card = ({ product_id, img, title, price, category, tags }) => {
     if (role == 'guest') {
       return dispatch(toogleModal(true));
     }
-
-    // console.log(user);
 
     toast.success('Berhasil menambahkan item!', { autoClose: 1000 });
     dispatch(

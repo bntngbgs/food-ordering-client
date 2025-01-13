@@ -1,0 +1,67 @@
+.invoice-table {
+  width: 70%;
+  margin: auto;
+  border-collapse: collapse;
+  margin-top: 2rem;
+
+  thead {
+    color: white;
+    border-right: 2px solid #fa4032;
+    border-left: 2px solid #fa4032;
+
+    tr {
+      background-color: #fa4032;
+    }
+
+    th {
+      padding-block: 0.65rem;
+      text-transform: uppercase;
+
+      &:first-child {
+        padding-left: 1rem;
+      }
+
+      &:last-child {
+        text-align: right;
+        padding-right: 1rem;
+      }
+
+      img {
+        width: 100px;
+      }
+    }
+  }
+
+  tbody {
+    border-left: 2px solid #fa4032;
+    border-right: 2px solid #fa4032;
+    font-size: 1.05rem;
+    tr {
+      &:last-child {
+        border-bottom: 2px solid #fa4032;
+      }
+
+      td {
+        padding: 1rem;
+
+        &:first-child {
+          width: 180px;
+        }
+      }
+    }
+  }
+}
+
+.checkout-button-wrapper {
+  width: 70%;
+  margin: auto;
+  margin-top: 2rem;
+
+  a {
+    display: flex;
+    text-decoration: none;
+    button {
+      margin-left: auto;
+    }
+  }
+}
