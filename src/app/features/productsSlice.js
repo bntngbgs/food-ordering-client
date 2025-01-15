@@ -59,6 +59,9 @@ const productSlice = createSlice({
     clearSearch: (state) => {
       state.searchQuery = '';
     },
+    resetSkip: (state) => {
+      state.skip = 0;
+    },
   },
 });
 
@@ -77,6 +80,7 @@ export const {
   clearTags,
   addSearch,
   clearSearch,
+  resetSkip,
 } = productSlice.actions;
 
 export default productSlice.reducer;

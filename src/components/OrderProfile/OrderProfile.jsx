@@ -1,11 +1,21 @@
 import axios from 'axios';
+import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IoClose } from 'react-icons/io5';
+import { TbSquareRoundedChevronRightFilled } from 'react-icons/tb';
 import './OrderProfile.scss';
+import { setCurrentOrderId } from '../../app/features/userSlice';
 
 const OrderProfile = () => {
   const { token } = useSelector((state) => state.user);
   const [orderData, setOrderData] = useState({});
+  const [showInvoice, setShowInvoice] = useState(false);
+  const [showDetails, setShowDetails] = useState({
+    id: '',
+    isShowing: false,
+  });
+  let dispatch = useDispatch();
 
   useEffect(() => {
     const getOrderData = async () => {
@@ -35,12 +45,29 @@ const OrderProfile = () => {
     getOrderData();
   }, []);
 
+  const handleExpand = (_id) => {
+    if (showDetails.id === _id) {
+      return setShowDetails({
+        id: '',
+      });
+    }
+    setShowDetails({
+      id: _id,
+    });
+  };
+
+  const handleClickInvoice = (id) => {
+    dispatch(setCurrentOrderId(id));
+    setShowInvoice(!showInvoice);
+  };
+
   return (
     <div className="order-profile">
       {orderData.length > 0 ? (
         <table>
           <thead>
             <tr>
+              <th></th>
               <th>Order ID</th>
               <th>Total</th>
               <th>Status</th>
@@ -50,24 +77,74 @@ const OrderProfile = () => {
 
           <tbody>
             {orderData.map((item, index) => (
-              <tr key={index}>
-                <td>#{item.order_number}</td>
-                <td>
-                  Rp.{' '}
-                  {Intl.NumberFormat('id-ID').format(
-                    item.grand_total + item.delivery_fee
-                  )}
-                </td>
-                <td>{item.status}</td>
-                <td>
-                  <button className="invoices-button">Invoices</button>
-                </td>
-              </tr>
+              <>
+                <tr key={index}>
+                  <td
+                    onClick={() => {
+                      handleExpand(item._id);
+                    }}
+                    className="expand-button"
+                  >
+                    <TbSquareRoundedChevronRightFilled
+                      size={28}
+                      color={'#fa4032'}
+                      className={showDetails.id === item._id ? 'rotate' : ''}
+                    />
+                  </td>
+                  <td>#{item.order_number}</td>
+                  <td>
+                    Rp.{' '}
+                    {Intl.NumberFormat('id-ID').format(
+                      item.grand_total + item.delivery_fee
+                    )}
+                  </td>
+                  <td>{item.status}</td>
+                  <td>
+                    <button
+                      className="invoices-button"
+                      onClick={() => handleClickInvoice(item._id)}
+                    >
+                      Invoices
+                    </button>
+                  </td>
+                </tr>
+                {showDetails.id === item._id && (
+                  <>
+                    <tr className="order-details">
+                      <th colSpan={2}>Barang</th>
+                      <th>Jumlah</th>
+                      <th colSpan={2}>Total Harga</th>
+                    </tr>
+                    {item.order_items.map((order, index) => (
+                      <tr className="order-details-value" key={index}>
+                        <td colSpan={2}>{order.name}</td>
+                        <td>{order.qty}</td>
+                        <td colSpan={2}>
+                          Rp. {Intl.NumberFormat('id-ID').format(order.price)}
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                )}
+              </>
             ))}
           </tbody>
         </table>
       ) : (
-        <p className="empty-order">Anda belum memiliki pesanan</p>
+        <p className="empty-order">Anda belum memiliki pesanan.</p>
+      )}
+      {showInvoice && (
+        <div className="invoice-modal-wrapper">
+          <div className="close-button-wrapper">
+            <IoClose
+              color={'#ffb200'}
+              size={48}
+              onClick={() => handleClickInvoice()}
+              className="close-button"
+            />
+          </div>
+          <InvoiceDetails />
+        </div>
       )}
     </div>
   );

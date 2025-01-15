@@ -15,6 +15,7 @@ import {
   removeTags,
   setGlobalCount,
   clearCategory,
+  resetSkip,
 } from '../../app/features/productsSlice';
 import './Home.scss';
 
@@ -100,12 +101,14 @@ const Home = () => {
   const handleClickTags = async (e) => {
     if (e.target.classList.contains('tag-wrapper')) return;
 
+    dispatch(resetSkip());
     dispatch(clearCategory());
 
     if (e.target.classList.contains('active')) {
       dispatch(removeTags(e.target.innerText));
       return e.target.classList.remove('active');
     }
+
     dispatch(addTags(e.target.innerText));
 
     e.target.classList.add('active');

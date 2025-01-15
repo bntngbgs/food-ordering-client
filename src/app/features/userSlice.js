@@ -27,6 +27,10 @@ const userSlice = createSlice({
     },
     userLogout: () => initialState,
     setCurrentOrderId: (state, action) => {
+      if (action.payload === undefined) {
+        return;
+      }
+
       state.currentOrderId = action.payload;
     },
   },

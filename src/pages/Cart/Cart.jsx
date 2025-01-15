@@ -18,7 +18,9 @@ const Cart = () => {
       <Breadcrumbs />
       <h2>Sub Total : Rp. {Intl.NumberFormat('id-ID').format(totalPrice)}</h2>
       {cart.length === 0 ? (
-        <p className="cart-empty">Belum ada produk.</p>
+        <p className="cart-empty">
+          Anda belum menambahkan produk ke keranjang.
+        </p>
       ) : (
         <div className="cart-table">
           <table>
