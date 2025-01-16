@@ -25,5 +25,9 @@
   .active-paginate {
     background-color: #fa4032;
     color: white;
+
+    &:hover {
+      background-color: #fa4032;
+    }
   }
 }

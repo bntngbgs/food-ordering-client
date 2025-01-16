@@ -28,4 +28,13 @@
   & button:last-child {
     font-weight: 700;
   }
+
+  .green-filled {
+    transition: all 0.4s ease;
+
+    &:hover {
+      box-shadow: rgba(80, 200, 120, 0.5) 0px 0px 30px 0px;
+      // background-color: rgb(80, 200, 120);
+    }
+  }
 }

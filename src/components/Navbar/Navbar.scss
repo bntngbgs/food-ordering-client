@@ -26,6 +26,16 @@
       padding: 0.5rem 0.75rem;
       border-radius: 4px;
       margin-left: 0.65rem;
+      transition: all 0.4s ease;
+
+      &:hover {
+        background-color: white;
+        color: #fa4032;
+
+        svg {
+          fill: #fa4032;
+        }
+      }
 
       p {
         font-weight: 700;

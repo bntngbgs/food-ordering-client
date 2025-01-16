@@ -76,7 +76,7 @@
     display: flex;
     justify-content: space-between;
 
-    button {
+    .outline-reversed {
       transition: all 0.3s ease;
 
       &:hover:enabled {

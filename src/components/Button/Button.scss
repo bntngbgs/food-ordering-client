@@ -29,6 +29,12 @@ button:disabled {
   padding: 0.25rem 0.75rem;
   font-size: 1.15rem;
   border-radius: 6px;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: white;
+    color: #fa4032;
+  }
 }
 
 .outline-reversed {
@@ -38,6 +44,12 @@ button:disabled {
   padding: 0.25rem 0.75rem;
   font-size: 1.15rem;
   border-radius: 6px;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: #fa4032;
+    color: white;
+  }
 }
 
 .filled {
@@ -48,6 +60,12 @@ button:disabled {
   font-size: 1.15rem;
   border-radius: 6px;
   margin-left: 0.5rem;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: #fa4032;
+    color: white;
+  }
 }
 
 .filled-reversed {
@@ -57,4 +75,10 @@ button:disabled {
   padding: 0.25rem 1.25rem;
   font-size: 1.15rem;
   border-radius: 6px;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: white;
+    color: #fa4032;
+  }
 }

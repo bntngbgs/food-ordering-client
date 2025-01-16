@@ -46,6 +46,14 @@
       background-color: #fa4032;
       border: none;
       border-radius: 4px;
+      transition: all 0.4s ease;
+
+      &:hover {
+        // box-shadow: rgba(250, 64, 50, 0.2) 0px 8px 24px,
+        //   rgba(250, 64, 50, 0.2) 0px 16px 56px,
+        //   rgba(250, 64, 50, 0.2) 0px 24px 80px;
+        box-shadow: rgba(250, 64, 50, 0.5) 0px 0px 30px 0px;
+      }
 
       img {
         width: 26px;
@@ -57,5 +65,11 @@
 
   & .tag-wrapper > .tag {
     pointer-events: none;
+    // background-color: rgb(250, 64, 50);
+    // background-color: rgb(250, 64, 50);
+    // background-color: rgb(200, 51, 40);
+    // background-color: rgb(75, 19, 15);
+    // background-color: rgb(200, 51, 40);
+    // background-color: rgb(255, 178, 0);
   }
 }

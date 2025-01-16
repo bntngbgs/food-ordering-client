@@ -68,4 +68,11 @@
   color: white;
   font-weight: 700;
   border-radius: 4px;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: #fff;
+    border: 1px solid #fa4032;
+    color: #fa4032;
+  }
 }
