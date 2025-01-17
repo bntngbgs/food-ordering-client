@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addAddress } from '../../app/features/deliveryAddressSlice';
+import {
+  addAddress,
+  toggleAddressForm,
+} from '../../app/features/deliveryAddressSlice';
 import { PiWarningCircleLight } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 import './AddressForm.scss';
@@ -150,6 +153,7 @@ const AddressForm = () => {
       });
 
       dispatch(addAddress(response.data));
+      dispatch(toggleAddressForm(false));
     } catch (error) {
       toast.error(error.message);
     }

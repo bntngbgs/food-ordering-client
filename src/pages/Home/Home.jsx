@@ -52,6 +52,10 @@ const Home = () => {
           dispatch(setDocumentLength(product.data.count));
         }
 
+        if (searchQuery !== '') {
+          dispatch(setGlobalCount(product.data.data));
+        }
+
         dispatch(addAllProducts(product.data.data));
       } catch (error) {
         console.log(error);
@@ -162,7 +166,7 @@ const Home = () => {
         </div>
       )}
 
-      {products.length > 1 && (
+      {products.length > 0 && (
         <Pagination handleCountPaginate={handleCountPaginate} />
       )}
     </section>

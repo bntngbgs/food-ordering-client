@@ -1,14 +1,18 @@
 import axios from 'axios';
 import AddressForm from '../AddressForm/AddressForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
-import { fetchWhenLogin } from '../../app/features/deliveryAddressSlice';
+// import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
+import {
+  fetchWhenLogin,
+  toggleAddressForm,
+} from '../../app/features/deliveryAddressSlice';
 import './DeliveryAddress.scss';
 
 const DeliveryAddress = () => {
   const { address, toggleForm } = useSelector((state) => state.deliveryAddress);
   const { token } = useSelector((state) => state.user);
+  const [showForm, setShowForm] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +25,14 @@ const DeliveryAddress = () => {
           }
         );
 
+        if (toggleForm) {
+          setShowForm(true);
+        } else {
+          setShowForm(false);
+        }
+
         dispatch(fetchWhenLogin(response.data));
+        dispatch(toggleAddressForm(false));
       } catch (error) {
         console.log(error);
       }
@@ -32,13 +43,10 @@ const DeliveryAddress = () => {
 
   return (
     <div className="address-profile">
-      <button
-        className="add-address"
-        onClick={() => dispatch(toggleAddressForm(!toggleForm))}
-      >
+      <button className="add-address" onClick={() => setShowForm(!showForm)}>
         Tambah Alamat
       </button>
-      {address.length > 0 && !toggleForm && (
+      {address.length > 0 && !showForm && (
         <table>
           <thead>
             <tr>
@@ -58,10 +66,10 @@ const DeliveryAddress = () => {
           </tbody>
         </table>
       )}{' '}
-      {address.length < 1 && !toggleForm && (
+      {address.length < 1 && !showForm && (
         <p className="empty-address">Anda belum memiliki alamat pengiriman.</p>
       )}
-      {toggleForm && <AddressForm />}
+      {showForm && <AddressForm />}
     </div>
   );
 };

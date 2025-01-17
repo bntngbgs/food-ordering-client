@@ -6,12 +6,10 @@
   width: 70%;
   margin: auto;
   margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
 
   a {
-    display: flex;
     text-decoration: none;
-    button {
-      margin-left: auto;
-    }
   }
 }

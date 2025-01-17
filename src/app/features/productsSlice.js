@@ -5,7 +5,6 @@ const initialState = {
   limit: 8,
   skip: 0,
   count: 0,
-  filteredCount: 0,
   category: '',
   tags: [],
   searchQuery: '',
@@ -30,9 +29,6 @@ const productSlice = createSlice({
     },
     selectPage: (state, action) => {
       state.skip = action.payload * state.limit;
-    },
-    setFilteredCount: (state, action) => {
-      state.filteredCount = action.payload.length;
     },
     setGlobalCount: (state, action) => {
       state.count = action.payload.length;
@@ -71,7 +67,6 @@ export const {
   incrementSkip,
   decrementSkip,
   selectPage,
-  setFilteredCount,
   setGlobalCount,
   addCategory,
   clearCategory,
