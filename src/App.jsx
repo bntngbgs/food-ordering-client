@@ -18,6 +18,7 @@ import CheckoutLayout from './layouts/CheckoutLayout';
 import CheckoutAddress from './components/CheckoutAddress/CheckoutAddress';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 import Invoice from './components/Invoice/Invoice';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="address" element={<DeliveryAddress />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );

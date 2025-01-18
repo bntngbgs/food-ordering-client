@@ -3,7 +3,10 @@ import Button from '../Button/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { setCheckoutAddress } from '../../app/features/deliveryAddressSlice';
+import {
+  setAddressInCheckout,
+  setCheckoutAddress,
+} from '../../app/features/deliveryAddressSlice';
 import { setCurrentOrderId } from '../../app/features/userSlice';
 import { clearCart } from '../../app/features/cartSlice';
 import './ConfirmOrder.scss';
@@ -58,6 +61,7 @@ const ConfirmOrder = () => {
       if (saveToOrder.status === 200) {
         dispatch(setCurrentOrderId(saveToOrder.data._id));
         dispatch(setCheckoutAddress(finalAddress.name));
+        dispatch(setAddressInCheckout(false));
         dispatch(clearCart());
         navigate('/checkout/invoice');
       }

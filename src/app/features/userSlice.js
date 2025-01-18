@@ -6,7 +6,6 @@ const initialState = {
   email: '',
   customer_id: '',
   role: 'guest',
-  loading: false,
   token: '',
   id: '',
   currentOrderId: '',

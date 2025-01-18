@@ -7,6 +7,7 @@ import {
   toggleAddressForm,
   setCheckoutAddress,
   fetchWhenLogin,
+  setAddressInCheckout,
 } from '../../app/features/deliveryAddressSlice';
 import './CheckoutAddress.scss';
 
@@ -49,6 +50,7 @@ const CheckoutAddress = () => {
 
   const handleAddAddress = () => {
     dispatch(toggleAddressForm(true));
+    dispatch(setAddressInCheckout(true));
   };
 
   return (

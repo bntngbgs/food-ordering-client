@@ -8,11 +8,17 @@ import {
 import { PiWarningCircleLight } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 import './AddressForm.scss';
+import { useNavigate } from 'react-router';
 
 const AddressForm = () => {
   const [validationError, setValidationError] = useState({});
   const { token } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { isFromCheckoutAddress } = useSelector(
+    (state) => state.deliveryAddress
+  );
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [wilayah, setWilayah] = useState({
     provinsi: [],
     kabupaten: [],
@@ -154,6 +160,12 @@ const AddressForm = () => {
 
       dispatch(addAddress(response.data));
       dispatch(toggleAddressForm(false));
+
+      if (isFromCheckoutAddress) {
+        setTimeout(() => {
+          navigate('/checkout/address');
+        }, 1000);
+      }
     } catch (error) {
       toast.error(error.message);
     }
