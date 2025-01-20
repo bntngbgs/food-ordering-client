@@ -3,6 +3,7 @@ import logo from '../../assets/logo.png';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './InvoiceDetails.scss';
+import SkeletonInvoice from '../Skeleton/SkeletonInvoice';
 
 const InvoiceDetails = () => {
   const [invoice, setInvoice] = useState({});
@@ -18,7 +19,7 @@ const InvoiceDetails = () => {
       );
 
       setInvoice(invoiceData.data);
-      setLoading(false);
+      // setLoading(false);
     };
 
     getData();
@@ -29,7 +30,7 @@ const InvoiceDetails = () => {
   return (
     <div className="invoice-table-wrapper">
       {loading ? (
-        <p>loading...</p>
+        <SkeletonInvoice />
       ) : (
         <table className="invoice-table">
           <thead>

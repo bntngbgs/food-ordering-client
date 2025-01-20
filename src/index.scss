@@ -59,32 +59,19 @@ h6 {
 
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  aspect-ratio: 1;
   border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  background: radial-gradient(farthest-side, #fa4032 94%, #0000) top/8px 8px
+      no-repeat,
+    conic-gradient(#0000 30%, #fa4032);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+  margin: auto;
+  margin-top: 4rem;
 }
-.loader::after {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-}
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
+@keyframes l13 {
   100% {
-    transform: rotate(360deg);
+    transform: rotate(1turn);
   }
 }

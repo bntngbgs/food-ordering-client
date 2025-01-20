@@ -8,6 +8,7 @@ const initialState = {
   category: '',
   tags: [],
   searchQuery: '',
+  isLoading: false,
 };
 
 const productSlice = createSlice({
@@ -58,6 +59,9 @@ const productSlice = createSlice({
     resetSkip: (state) => {
       state.skip = 0;
     },
+    setLoadingState: (state, action) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
@@ -76,6 +80,7 @@ export const {
   addSearch,
   clearSearch,
   resetSkip,
+  setLoadingState,
 } = productSlice.actions;
 
 export default productSlice.reducer;

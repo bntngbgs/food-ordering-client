@@ -21,15 +21,21 @@
       font-weight: bold;
       font-size: 1.25rem;
     }
+
+    .skeleton.tags {
+      width: 82px;
+      height: 25px;
+    }
   }
 
   .card-wrapper {
     margin-top: 3rem;
     display: flex;
     flex-wrap: wrap;
-    column-gap: 2rem;
-    row-gap: 2rem;
+    gap: 2rem;
+    // gap: 2rem;
     // justify-content: center;
+    // align-items: flex-start;
   }
 
   .empty-search {
@@ -38,5 +44,13 @@
     color: lightgray;
     margin-top: 6rem;
     text-align: center;
+  }
+
+  .home-skeleton {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    // justify-content: space-between;
   }
 }

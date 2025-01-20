@@ -8,17 +8,21 @@ import {
   setCheckoutAddress,
   fetchWhenLogin,
   setAddressInCheckout,
+  setAddressLoadingState,
 } from '../../app/features/deliveryAddressSlice';
 import './CheckoutAddress.scss';
 
 const CheckoutAddress = () => {
-  let { address } = useSelector((state) => state.deliveryAddress);
-  let { token } = useSelector((state) => state.user);
-  const [selectedAddress, setSelectedAddress] = useState('');
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  const { address } = useSelector((state) => state.deliveryAddress);
+  const { token } = useSelector((state) => state.user);
+  const { isLoading } = useSelector((state) => state.deliveryAddress);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
   useEffect(() => {
+    dispatch(setAddressLoadingState(true));
+
     const getAddressFromDB = async () => {
       try {
         let addressData = await axios.get(
@@ -27,6 +31,7 @@ const CheckoutAddress = () => {
         );
 
         dispatch(fetchWhenLogin(addressData.data));
+        dispatch(setAddressLoadingState(false));
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +61,12 @@ const CheckoutAddress = () => {
   return (
     <div className="address-table-wrapper">
       <h1>Pilih Alamat Pengiriman</h1>
-      {address.length > 0 ? (
+      {isLoading && (
+        <div className="address-loader">
+          <div className="loader"></div>
+        </div>
+      )}
+      {address.length > 0 && !isLoading && (
         <table className="address-table">
           <thead>
             <tr>
@@ -83,15 +93,8 @@ const CheckoutAddress = () => {
             ))}
           </tbody>
         </table>
-      ) : (
-        <div className="checkout-address-empty">
-          <h2>Anda belum memiliki alamat pengiriman.</h2>
-          <Link to="/user/address" onClick={handleAddAddress}>
-            Tambah alamat
-          </Link>
-        </div>
       )}
-      {address.length > 0 && (
+      {address.length > 0 && !isLoading && (
         <div className="checkout-button-wrapper">
           <Button
             variant="filled-reversed"
@@ -104,6 +107,14 @@ const CheckoutAddress = () => {
             handleClick={handleClick}
             disabled={selectedAddress === ''}
           />
+        </div>
+      )}
+      {address.length < 1 && !isLoading && (
+        <div className="checkout-address-empty">
+          <h2>Anda belum memiliki alamat pengiriman.</h2>
+          <Link to="/user/address" onClick={handleAddAddress}>
+            Tambah alamat
+          </Link>
         </div>
       )}
     </div>

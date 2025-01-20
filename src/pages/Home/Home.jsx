@@ -16,8 +16,11 @@ import {
   setGlobalCount,
   clearCategory,
   resetSkip,
+  setLoadingState,
 } from '../../app/features/productsSlice';
 import './Home.scss';
+import SkeletonCard from '../../components/Skeleton/SkeletonCard';
+import Skeleton from '../../components/Skeleton/Skeleton';
 
 const Home = () => {
   const {
@@ -29,6 +32,7 @@ const Home = () => {
     category,
     tags,
     searchQuery,
+    isLoading,
   } = useSelector((state) => state.product);
   const { showModal } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -36,6 +40,8 @@ const Home = () => {
 
   // Effects for get the displayed product data
   useEffect(() => {
+    dispatch(setLoadingState(true));
+
     let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
 
     if (tags.length > 0) {
@@ -57,6 +63,7 @@ const Home = () => {
         }
 
         dispatch(addAllProducts(product.data.data));
+        dispatch(setLoadingState(false));
       } catch (error) {
         console.log(error);
       }
@@ -140,18 +147,32 @@ const Home = () => {
       {showModal && <NotAuthModal />}
       <h1>Home</h1>
 
+      {/* <SkeletonCard /> */}
+
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>
-        {tagData.map((item, index) => (
-          <Tags name={item.name} key={index} />
-        ))}
+        {isLoading
+          ? Array(16)
+              .fill(1)
+              .map((_, index) => <Skeleton type="tags" key={index} />)
+          : tagData.map((item, index) => <Tags name={item.name} key={index} />)}
       </div>
 
-      {products.length < 1 ? (
+      {isLoading && (
+        <div className="home-skeleton">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+      )}
+
+      {products.length < 1 && !isLoading && (
         <h1 className="empty-search">
           Maaf, produk yang anda cari tidak dapat ditemukan.
         </h1>
-      ) : (
+      )}
+
+      {products.length > 0 && !isLoading && (
         <div className="card-wrapper">
           {products.map((item, index) => (
             <Card

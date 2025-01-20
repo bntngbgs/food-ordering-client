@@ -5,6 +5,7 @@ const initialState = {
   selectedAddress: [],
   toggleForm: false,
   isFromCheckoutAddress: false,
+  isLoading: false,
 };
 
 const deliveryAddressSlice = createSlice({
@@ -27,6 +28,9 @@ const deliveryAddressSlice = createSlice({
     setAddressInCheckout: (state, action) => {
       state.isFromCheckoutAddress = action.payload;
     },
+    setAddressLoadingState: (state, action) => {
+      state.isLoading = action.payload;
+    },
     removeWhenLogout: () => initialState,
   },
 });
@@ -38,6 +42,7 @@ export const {
   fetchWhenLogin,
   setCheckoutAddress,
   setAddressInCheckout,
+  setAddressLoadingState,
 } = deliveryAddressSlice.actions;
 
 export default deliveryAddressSlice.reducer;
