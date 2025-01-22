@@ -5,9 +5,7 @@ import './Pagination.scss';
 
 const Pagination = ({ handleCountPaginate }) => {
   const { count, limit, skip } = useSelector((state) => state.product);
-  let pageCount;
-
-  pageCount = Math.ceil(count / limit);
+  let pageCount = Math.ceil(count / limit);
 
   return (
     <div className="pagination-wrapper">

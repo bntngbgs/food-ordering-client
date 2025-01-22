@@ -9,6 +9,7 @@ import { setCurrentOrderId } from '../../app/features/userSlice';
 
 const OrderProfile = () => {
   const { token } = useSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState(false);
   const [orderData, setOrderData] = useState({});
   const [showInvoice, setShowInvoice] = useState(false);
   const [showDetails, setShowDetails] = useState({
@@ -18,6 +19,8 @@ const OrderProfile = () => {
   let dispatch = useDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
+
     const getOrderData = async () => {
       const order = await axios.get(`http://localhost:3000/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -40,6 +43,7 @@ const OrderProfile = () => {
       }));
 
       setOrderData(finalOrderData);
+      setIsLoading(false);
     };
 
     getOrderData();
@@ -63,7 +67,13 @@ const OrderProfile = () => {
 
   return (
     <div className="order-profile">
-      {orderData.length > 0 ? (
+      {isLoading && (
+        <div className="order-loader">
+          <div className="loader loader-small"></div>
+        </div>
+      )}
+
+      {orderData.length > 0 && !isLoading && (
         <table>
           <thead>
             <tr>
@@ -130,9 +140,12 @@ const OrderProfile = () => {
             ))}
           </tbody>
         </table>
-      ) : (
+      )}
+
+      {orderData.length < 1 && !isLoading && (
         <p className="empty-order">Anda belum memiliki pesanan.</p>
       )}
+
       {showInvoice && (
         <div className="invoice-modal-wrapper">
           <div className="close-button-wrapper">

@@ -19,13 +19,11 @@ const InvoiceDetails = () => {
       );
 
       setInvoice(invoiceData.data);
-      // setLoading(false);
+      setLoading(false);
     };
 
     getData();
   }, [currentOrderId, token]);
-
-  console.log(invoice);
 
   return (
     <div className="invoice-table-wrapper">

@@ -70,6 +70,11 @@ h6 {
   margin: auto;
   margin-top: 4rem;
 }
+
+.loader.loader-small {
+  width: 50px;
+}
+
 @keyframes l13 {
   100% {
     transform: rotate(1turn);

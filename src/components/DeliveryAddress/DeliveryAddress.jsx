@@ -13,9 +13,12 @@ const DeliveryAddress = () => {
   const { address, toggleForm } = useSelector((state) => state.deliveryAddress);
   const { token } = useSelector((state) => state.user);
   const [showForm, setShowForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
+
     const getDeliveryAddress = async () => {
       try {
         let response = await axios.get(
@@ -33,20 +36,34 @@ const DeliveryAddress = () => {
 
         dispatch(fetchWhenLogin(response.data));
         dispatch(toggleAddressForm(false));
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
     getDeliveryAddress();
-  }, [token, dispatch]);
+  }, [token, dispatch, toggleForm]);
 
   return (
     <div className="address-profile">
-      <button className="add-address" onClick={() => setShowForm(!showForm)}>
+      <button
+        className="add-address"
+        onClick={() => {
+          setShowForm(!showForm);
+          setIsLoading(false);
+        }}
+      >
         Tambah Alamat
       </button>
-      {address.length > 0 && !showForm && (
+
+      {isLoading && (
+        <div className="profile-address-loader">
+          <div className="loader loader-small"></div>
+        </div>
+      )}
+
+      {address.length > 0 && !showForm && !isLoading && (
         <table>
           <thead>
             <tr>
@@ -65,8 +82,8 @@ const DeliveryAddress = () => {
               ))}
           </tbody>
         </table>
-      )}{' '}
-      {address.length < 1 && !showForm && (
+      )}
+      {address.length < 1 && !showForm && !isLoading && (
         <p className="empty-address">Anda belum memiliki alamat pengiriman.</p>
       )}
       {showForm && <AddressForm />}

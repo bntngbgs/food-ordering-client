@@ -66,8 +66,51 @@
       cursor: pointer;
     }
 
+    .invoice-table-wrapper {
+      .skeleton-invoice {
+        thead {
+          th {
+            padding-block: 0.75rem;
+          }
+
+          th:last-child {
+            padding-right: 1rem;
+
+            .skeleton {
+              margin-left: auto;
+            }
+          }
+        }
+        .skeleton {
+          margin: 0;
+        }
+
+        tbody {
+          tr:nth-child(4) {
+            .skeleton:nth-child(2) {
+              margin-block: 10px;
+            }
+          }
+
+          tr:nth-child(5) {
+            td:nth-child(2) {
+              .skeleton.tags {
+                margin-top: 6px;
+              }
+            }
+          }
+        }
+
+        // .skeleton:nth-child(3) {
+        //   background-color: blue;
+        //   margin-block: 10px;
+        // }
+      }
+    }
+
     table {
       margin-top: 10rem;
+      width: 70%;
 
       tr {
         td {

@@ -147,8 +147,6 @@ const Home = () => {
       {showModal && <NotAuthModal />}
       <h1>Home</h1>
 
-      {/* <SkeletonCard /> */}
-
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>
         {isLoading
