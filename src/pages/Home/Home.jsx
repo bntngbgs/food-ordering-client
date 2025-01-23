@@ -21,6 +21,7 @@ import {
 import './Home.scss';
 import SkeletonCard from '../../components/Skeleton/SkeletonCard';
 import Skeleton from '../../components/Skeleton/Skeleton';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const {
@@ -37,6 +38,7 @@ const Home = () => {
   const { showModal } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [tagData, setTagData] = useState([]);
+  const [loadingTag, setLoadingTag] = useState(false);
 
   // Effects for get the displayed product data
   useEffect(() => {
@@ -74,13 +76,20 @@ const Home = () => {
 
   // Effects for get all the displayed tag data
   useEffect(() => {
+    setLoadingTag(true);
+
     const getTagData = async () => {
       try {
         const tags = await axios.get('http://localhost:3000/api/tags');
 
+        if (!Array.isArray(tags.data)) {
+          throw Error('API Error');
+        }
+
         setTagData(tags.data);
+        setLoadingTag(false);
       } catch (error) {
-        console.log(error);
+        toast.error(`${error.message}: Can't fetch tag data`);
       }
     };
 
@@ -124,22 +133,31 @@ const Home = () => {
 
     e.target.classList.add('active');
 
-    let query = tags.map((tag) => `&tags[]=${tag}`).join('');
+    // let query = tags.map((tag) => `&tags[]=${tag}`).join('');
 
-    const resultLength = await axios.get(
-      `http://localhost:3000/api/products?${query}`
-    );
+    // try {
+    //   const resultLength = await axios.get(
+    //     `http://localhost:3000/api/products?${query}`
+    //   );
 
-    dispatch(setGlobalCount(resultLength.data.data));
+    //   dispatch(setGlobalCount(resultLength.data.data));
+    // } catch (error) {
+    //   toast.error(`${error.message}: Can't set tag data length`);
+    // }
   };
 
   const getTagResultLength = async () => {
     let query = tags.map((tag) => `&tags[]=${tag}`).join('');
-    const resultLength = await axios.get(
-      `http://localhost:3000/api/products?tags[]=${query}&limit=${0}`
-    );
 
-    dispatch(setGlobalCount(resultLength.data.data));
+    try {
+      const resultLength = await axios.get(
+        `http://localhost:3000/api/products?tags[]=${query}&limit=${0}`
+      );
+
+      dispatch(setGlobalCount(resultLength.data.data));
+    } catch (error) {
+      toast.error(`${error.message}: Can't set tag data length`);
+    }
   };
 
   return (
@@ -149,7 +167,7 @@ const Home = () => {
 
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>
-        {isLoading
+        {loadingTag
           ? Array(16)
               .fill(1)
               .map((_, index) => <Skeleton type="tags" key={index} />)
