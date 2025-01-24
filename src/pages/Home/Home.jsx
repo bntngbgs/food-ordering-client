@@ -56,6 +56,12 @@ const Home = () => {
           `http://localhost:3000/api/products?q=${searchQuery}&limit=${limit}&skip=${skip}&category=${category}${tagQuery}`
         );
 
+        console.log(product);
+
+        if (!product.data.data) {
+          throw Error('API Error');
+        }
+
         if (category == '' && tags.length == 0) {
           dispatch(setDocumentLength(product.data.count));
         }
@@ -67,7 +73,7 @@ const Home = () => {
         dispatch(addAllProducts(product.data.data));
         dispatch(setLoadingState(false));
       } catch (error) {
-        console.log(error);
+        toast.error(`${error.message}: Can't fetch product data`);
       }
     };
 
@@ -176,7 +182,7 @@ const Home = () => {
 
       {isLoading && (
         <div className="home-skeleton">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
+          {Array.from(Array(8)).map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>

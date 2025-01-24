@@ -16,11 +16,41 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     const userData = {
       full_name: name,
       email,
       password,
     };
+
+    if (userData.full_name == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        full_name: 'Nama harus diisi',
+      }));
+    }
+
+    if (userData.email == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        email: 'Email harus diisi',
+      }));
+    }
+
+    if (userData.password == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        password: 'Password harus diisi',
+      }));
+    }
+
+    if (
+      userData.full_name == '' ||
+      userData.email == '' ||
+      userData.password == ''
+    ) {
+      return;
+    }
 
     try {
       const user = await axios.post(
@@ -28,8 +58,8 @@ const Register = () => {
         userData
       );
 
-      if (user.data.error) {
-        return setValidationError(user.data.fields);
+      if (typeof user.data !== 'object') {
+        throw Error('API Error');
       }
 
       toast.success('Registrasi berhasil, silahkan login', {
@@ -45,7 +75,7 @@ const Register = () => {
         navigate('/login');
       }, 2500);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(`${error.message}: Please try again later`);
     }
   };
 
@@ -71,7 +101,7 @@ const Register = () => {
         {validationError.full_name && (
           <div className="error-wrapper">
             <PiWarningCircleLight color="red" size={24} />{' '}
-            <p>{validationError.full_name.message}</p>
+            <p>{validationError.full_name}</p>
           </div>
         )}
         <input
@@ -92,7 +122,7 @@ const Register = () => {
         {validationError.email && (
           <div className="error-wrapper">
             <PiWarningCircleLight color="red" size={24} />{' '}
-            <p>{validationError.email.message}</p>
+            <p>{validationError.email}</p>
           </div>
         )}
         <input
@@ -113,7 +143,7 @@ const Register = () => {
         {validationError.password && (
           <div className="error-wrapper">
             <PiWarningCircleLight color="red" size={24} />{' '}
-            <p>{validationError.password.message}</p>
+            <p>{validationError.password}</p>
           </div>
         )}
         <Button variant="filled-reversed" text="Register" type="submit" />

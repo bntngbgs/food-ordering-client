@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Button from '../../components/Button/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userLogin } from '../../app/features/userSlice';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
@@ -14,9 +14,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [validationError, setValidationError] = useState({});
   const [authError, setAuthError] = useState('');
-  const { loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let loginData = {};
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,10 +36,14 @@ const Login = () => {
       }));
     }
 
-    const loginData = {
-      email,
-      password,
-    };
+    if (email == '' || password == '') {
+      return;
+    } else {
+      loginData = {
+        email,
+        password,
+      };
+    }
 
     try {
       const user = await axios.post(
@@ -49,6 +53,10 @@ const Login = () => {
 
       if (user.data.error) {
         return setAuthError(user.data.message);
+      }
+
+      if (!user.data.token) {
+        throw Error('API Call Error');
       }
 
       toast.success(user.data.message, {
@@ -72,7 +80,6 @@ const Login = () => {
   return (
     <section className="login-page">
       <h1>User Login</h1>
-      {loading && <p>loading...</p>}
       {authError && (
         <div className="auth-error-wrapper">
           <h3>Login Failed</h3>
@@ -106,7 +113,7 @@ const Login = () => {
           id="password"
           name="password"
           placeholder="Password"
-          className={validationError.email ? 'input-error' : ''}
+          className={validationError.password ? 'input-error' : ''}
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
