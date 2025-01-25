@@ -7,6 +7,7 @@ import {
   setGlobalCount,
 } from '../../app/features/productsSlice';
 import './CategorySelect.scss';
+import { toast } from 'react-toastify';
 
 const CategorySelect = () => {
   const { category } = useSelector((state) => state.product);
@@ -19,6 +20,12 @@ const CategorySelect = () => {
         `http://localhost:3000/api/products?category=${selectedOption}`
       );
 
+      console.log(productLength);
+
+      if (!Array.isArray(productLength.data.data)) {
+        throw Error('API Error');
+      }
+
       dispatch(setGlobalCount(productLength.data.data));
       dispatch(addCategory(selectedOption));
       dispatch(clearTags());
@@ -26,7 +33,7 @@ const CategorySelect = () => {
         .querySelectorAll('.active')
         .forEach((item) => item.classList.remove('active'));
     } catch (error) {
-      console.log(error);
+      toast.error(`${error.message}: Can't fetch product length`);
     }
   };
 

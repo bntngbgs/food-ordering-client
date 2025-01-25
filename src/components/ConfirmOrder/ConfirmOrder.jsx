@@ -12,19 +12,18 @@ import { clearCart } from '../../app/features/cartSlice';
 import './ConfirmOrder.scss';
 
 const ConfirmOrder = () => {
-  const [finalAddress, setFinalAddress] = useState({
-    name: '',
-    id: '',
-  });
   const { address, selectedAddress } = useSelector(
     (state) => state.deliveryAddress
   );
   const { token } = useSelector((state) => state.user);
   const { cart } = useSelector((state) => state.cart);
+  const { totalPrice } = useSelector((state) => state.cart);
+  const [finalAddress, setFinalAddress] = useState({
+    name: '',
+    id: '',
+  });
   let navigate = useNavigate();
   let dispatch = useDispatch();
-
-  const { totalPrice } = useSelector((state) => state.cart);
 
   const handleClickPrevious = () => {
     navigate('/checkout/address');

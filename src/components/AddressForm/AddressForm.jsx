@@ -31,6 +31,14 @@ const AddressForm = () => {
     kecamatan: '',
     kelurahan: '',
   });
+  const [formData, setFormData] = useState({
+    nama: '',
+    detail: '',
+    provinsi: '',
+    kabupaten: '',
+    kecamatan: '',
+    kelurahan: '',
+  });
 
   // fetch data provinsi dari api
   useEffect(() => {
@@ -42,9 +50,7 @@ const AddressForm = () => {
 
         setWilayah((prev) => ({ ...prev, provinsi: response.data }));
       } catch (error) {
-        toast.error(
-          `Error ${error.status}: Tidak dapat terhubung ke API wilayah`
-        );
+        toast.error(`${error.message}: Tidak dapat terhubung ke API wilayah`);
       }
     };
 
@@ -61,7 +67,7 @@ const AddressForm = () => {
 
         setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
       } catch (error) {
-        `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
+        `${error.message}: Tidak dapat terhubung ke API wilayah`;
       }
     };
 
@@ -78,7 +84,7 @@ const AddressForm = () => {
 
         setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
       } catch (error) {
-        `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
+        `${error.message}: Tidak dapat terhubung ke API wilayah`;
       }
     };
 
@@ -95,21 +101,12 @@ const AddressForm = () => {
 
         setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
       } catch (error) {
-        `Error ${error.status}: Tidak dapat terhubung ke API wilayah`;
+        `${error.message}: Tidak dapat terhubung ke API wilayah`;
       }
     };
 
     getWilayahApi();
   }, [id.kecamatan]);
-
-  const [formData, setFormData] = useState({
-    nama: '',
-    detail: '',
-    provinsi: '',
-    kabupaten: '',
-    kecamatan: '',
-    kelurahan: '',
-  });
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -132,6 +129,47 @@ const AddressForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.nama == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        nama: 'Nama alamat harus diisi',
+      }));
+    }
+    if (formData.detail == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        detail: 'Detail alamat harus diisi',
+      }));
+    }
+    if (formData.provinsi == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        provinsi: 'Provinsi harus diisi',
+      }));
+    }
+    if (formData.kabupaten == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        kabupaten: 'Kabupaten harus diisi',
+      }));
+    }
+    if (formData.kecamatan == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        kecamatan: 'Kecamatan harus diisi',
+      }));
+    }
+    if (formData.kelurahan == '') {
+      setValidationError((prevState) => ({
+        ...prevState,
+        kelurahan: 'Kelurahan harus diisi',
+      }));
+    }
+
+    if (Object.values(formData).some((item) => item === '')) {
+      return;
+    }
+
     const validAddressData = {
       nama: formData.nama,
       detail: formData.detail,
@@ -150,8 +188,8 @@ const AddressForm = () => {
         }
       );
 
-      if (response.data.error) {
-        return setValidationError(response.data.field);
+      if (typeof response.data !== 'object') {
+        throw Error('API Error');
       }
 
       toast.success('Alamat berhasil ditambahkan', {
@@ -189,7 +227,7 @@ const AddressForm = () => {
             {validationError.nama && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.nama.message}</p>
+                <p>{validationError.nama}</p>
               </div>
             )}
           </div>
@@ -207,7 +245,7 @@ const AddressForm = () => {
             {validationError.detail && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.detail.message}</p>
+                <p>{validationError.detail}</p>
               </div>
             )}
           </div>
@@ -233,7 +271,7 @@ const AddressForm = () => {
             {validationError.provinsi && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.provinsi.message}</p>
+                <p>{validationError.provinsi}</p>
               </div>
             )}
           </div>
@@ -258,7 +296,7 @@ const AddressForm = () => {
             {validationError.kabupaten && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.kabupaten.message}</p>
+                <p>{validationError.kabupaten}</p>
               </div>
             )}
           </div>
@@ -283,7 +321,7 @@ const AddressForm = () => {
             {validationError.kecamatan && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.kecamatan.message}</p>
+                <p>{validationError.kecamatan}</p>
               </div>
             )}
           </div>
@@ -308,7 +346,7 @@ const AddressForm = () => {
             {validationError.kelurahan && (
               <div className="error-wrapper">
                 <PiWarningCircleLight color="red" size={24} />{' '}
-                <p>{validationError.kelurahan.message}</p>
+                <p>{validationError.kelurahan}</p>
               </div>
             )}
           </div>

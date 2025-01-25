@@ -35,7 +35,9 @@ const DeliveryAddress = () => {
         }
 
         dispatch(fetchWhenLogin(response.data));
-        dispatch(toggleAddressForm(false));
+        if (!showForm) {
+          dispatch(toggleAddressForm(false));
+        }
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -43,7 +45,7 @@ const DeliveryAddress = () => {
     };
 
     getDeliveryAddress();
-  }, [token, dispatch, toggleForm]);
+  }, []);
 
   return (
     <div className="address-profile">

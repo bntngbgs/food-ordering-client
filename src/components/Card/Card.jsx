@@ -18,7 +18,6 @@ const Card = ({ product_id, img, title, price, category, tags }) => {
       return dispatch(toogleModal(true));
     }
 
-    toast.success('Berhasil menambahkan item!', { autoClose: 1000 });
     dispatch(
       addToCart({
         product: { _id: product_id },
@@ -30,6 +29,8 @@ const Card = ({ product_id, img, title, price, category, tags }) => {
       })
     );
     dispatch(countTotal());
+
+    toast.success('Berhasil menambahkan item!', { autoClose: 1000 });
   };
 
   return (

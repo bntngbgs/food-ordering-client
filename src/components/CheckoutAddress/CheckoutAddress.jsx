@@ -11,6 +11,7 @@ import {
   setAddressLoadingState,
 } from '../../app/features/deliveryAddressSlice';
 import './CheckoutAddress.scss';
+import { toast } from 'react-toastify';
 
 const CheckoutAddress = () => {
   let navigate = useNavigate();
@@ -30,10 +31,14 @@ const CheckoutAddress = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
+        if (!Array.isArray(addressData.data.data)) {
+          throw Error('API Error');
+        }
+
         dispatch(fetchWhenLogin(addressData.data));
         dispatch(setAddressLoadingState(false));
       } catch (error) {
-        console.log(error);
+        toast.error(`${error.message}: Can't fetch address data`);
       }
     };
 
