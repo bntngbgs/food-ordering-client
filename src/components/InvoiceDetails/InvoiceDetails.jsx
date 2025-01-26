@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './InvoiceDetails.scss';
 import SkeletonInvoice from '../Skeleton/SkeletonInvoice';
+import { toast } from 'react-toastify';
 
 const InvoiceDetails = () => {
   const [invoice, setInvoice] = useState({});
@@ -13,13 +14,21 @@ const InvoiceDetails = () => {
 
   useEffect(() => {
     const getData = async () => {
-      let invoiceData = await axios.get(
-        `http://localhost:3000/api/invoices/${currentOrderId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      try {
+        let invoiceData = await axios.get(
+          `http://localhost:3000/api/invoices/${currentOrderId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-      setInvoice(invoiceData.data);
-      setLoading(false);
+        if (typeof invoiceData.data == 'string') {
+          throw Error('API Error');
+        }
+
+        setInvoice(invoiceData.data);
+        setLoading(false);
+      } catch (error) {
+        toast.error(`${error.message}: Error creating invoice`);
+      }
     };
 
     getData();

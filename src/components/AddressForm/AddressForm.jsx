@@ -10,10 +10,10 @@ import { toast } from 'react-toastify';
 import './AddressForm.scss';
 import { useNavigate } from 'react-router';
 
-const AddressForm = () => {
+const AddressForm = ({ handleChangeShowForm }) => {
   const [validationError, setValidationError] = useState({});
   const { token } = useSelector((state) => state.user);
-  const { isFromCheckoutAddress } = useSelector(
+  const { isFromCheckoutAddress, toggleForm } = useSelector(
     (state) => state.deliveryAddress
   );
   let dispatch = useDispatch();
@@ -197,7 +197,8 @@ const AddressForm = () => {
       });
 
       dispatch(addAddress(response.data));
-      dispatch(toggleAddressForm(false));
+      dispatch(toggleAddressForm(!toggleForm));
+      handleChangeShowForm();
 
       if (isFromCheckoutAddress) {
         setTimeout(() => {

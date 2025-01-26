@@ -1,18 +1,13 @@
 import axios from 'axios';
-import AddressForm from '../AddressForm/AddressForm';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
-import {
-  fetchWhenLogin,
-  toggleAddressForm,
-} from '../../app/features/deliveryAddressSlice';
+import { fetchWhenLogin } from '../../app/features/deliveryAddressSlice';
 import './DeliveryAddress.scss';
+import { toast } from 'react-toastify';
 
 const DeliveryAddress = () => {
-  const { address, toggleForm } = useSelector((state) => state.deliveryAddress);
+  const { address } = useSelector((state) => state.deliveryAddress);
   const { token } = useSelector((state) => state.user);
-  const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -28,19 +23,11 @@ const DeliveryAddress = () => {
           }
         );
 
-        if (toggleForm) {
-          setShowForm(true);
-        } else {
-          setShowForm(false);
-        }
-
         dispatch(fetchWhenLogin(response.data));
-        if (!showForm) {
-          dispatch(toggleAddressForm(false));
-        }
+
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        toast.error(`${error.message}: Can't fetch order data`);
       }
     };
 
@@ -48,24 +35,14 @@ const DeliveryAddress = () => {
   }, []);
 
   return (
-    <div className="address-profile">
-      <button
-        className="add-address"
-        onClick={() => {
-          setShowForm(!showForm);
-          setIsLoading(false);
-        }}
-      >
-        Tambah Alamat
-      </button>
-
+    <>
       {isLoading && (
         <div className="profile-address-loader">
           <div className="loader loader-small"></div>
         </div>
       )}
 
-      {address.length > 0 && !showForm && !isLoading && (
+      {address.length > 0 && !isLoading && (
         <table>
           <thead>
             <tr>
@@ -85,11 +62,10 @@ const DeliveryAddress = () => {
           </tbody>
         </table>
       )}
-      {address.length < 1 && !showForm && !isLoading && (
+      {address.length < 1 && !isLoading && (
         <p className="empty-address">Anda belum memiliki alamat pengiriman.</p>
       )}
-      {showForm && <AddressForm />}
-    </div>
+    </>
   );
 };
 export default DeliveryAddress;

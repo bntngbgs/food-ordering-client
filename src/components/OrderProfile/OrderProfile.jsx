@@ -6,6 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { TbSquareRoundedChevronRightFilled } from 'react-icons/tb';
 import './OrderProfile.scss';
 import { setCurrentOrderId } from '../../app/features/userSlice';
+import { toast } from 'react-toastify';
 
 const OrderProfile = () => {
   const { token } = useSelector((state) => state.user);
@@ -22,28 +23,36 @@ const OrderProfile = () => {
     setIsLoading(true);
 
     const getOrderData = async () => {
-      const order = await axios.get(`http://localhost:3000/api/orders`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      try {
+        const order = await axios.get(`http://localhost:3000/api/orders`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      let orderItems = await order.data.data.map((item) => item.order_items);
+        if (typeof order.data === 'string') {
+          throw Error('API Error');
+        }
 
-      let grandTotal = await orderItems.map((item) =>
-        item.map((data) => data.price * data.qty)
-      );
+        let orderItems = await order.data.data.map((item) => item.order_items);
 
-      let grandGrandTotal = await grandTotal.map(
-        (item) => item.reduce((prev, curr) => prev + curr),
-        0
-      );
+        let total = await orderItems.map((item) =>
+          item.map((data) => data.price * data.qty)
+        );
 
-      let finalOrderData = order.data.data.map((item, index) => ({
-        ...item,
-        grand_total: grandGrandTotal[index],
-      }));
+        let grandTotal = await total.map(
+          (item) => item.reduce((prev, curr) => prev + curr),
+          0
+        );
 
-      setOrderData(finalOrderData);
-      setIsLoading(false);
+        let finalOrderData = order.data.data.map((item, index) => ({
+          ...item,
+          grand_total: grandTotal[index],
+        }));
+
+        setOrderData(finalOrderData);
+        setIsLoading(false);
+      } catch (error) {
+        toast.error(`${error.message}: Can't fetch order data`);
+      }
     };
 
     getOrderData();
