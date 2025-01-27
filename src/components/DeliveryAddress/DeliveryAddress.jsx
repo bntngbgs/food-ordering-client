@@ -23,11 +23,15 @@ const DeliveryAddress = () => {
           }
         );
 
+        if (typeof response.data === 'string') {
+          throw Error('API Error');
+        }
+
         dispatch(fetchWhenLogin(response.data));
 
         setIsLoading(false);
       } catch (error) {
-        toast.error(`${error.message}: Can't fetch order data`);
+        toast.error(`${error.message}: Can't fetch address data`);
       }
     };
 

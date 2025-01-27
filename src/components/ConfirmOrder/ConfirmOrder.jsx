@@ -10,6 +10,7 @@ import {
 import { setCurrentOrderId } from '../../app/features/userSlice';
 import { clearCart } from '../../app/features/cartSlice';
 import './ConfirmOrder.scss';
+import { toast } from 'react-toastify';
 
 const ConfirmOrder = () => {
   const { address, selectedAddress } = useSelector(
@@ -45,9 +46,17 @@ const ConfirmOrder = () => {
 
   const handleConfirm = async () => {
     try {
-      await axios.put('http://localhost:3000/api/carts', cart, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      let saveToCart = await axios.put(
+        'http://localhost:3000/api/carts',
+        cart,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (typeof saveToCart.data === 'string') {
+        throw new Error('API Error');
+      }
 
       let saveToOrder = await axios.post(
         'http://localhost:3000/api/orders',
@@ -57,6 +66,10 @@ const ConfirmOrder = () => {
         }
       );
 
+      if (typeof saveToOrder.data === 'string') {
+        throw new Error('API Error');
+      }
+
       if (saveToOrder.status === 200) {
         dispatch(setCurrentOrderId(saveToOrder.data._id));
         dispatch(setCheckoutAddress(finalAddress.name));
@@ -65,7 +78,7 @@ const ConfirmOrder = () => {
         navigate('/checkout/invoice');
       }
     } catch (error) {
-      console.log(error.stack);
+      toast.error(`${error.message}: Can't save order data`);
     }
   };
 

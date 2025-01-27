@@ -11,14 +11,11 @@ import './AddressForm.scss';
 import { useNavigate } from 'react-router';
 
 const AddressForm = ({ handleChangeShowForm }) => {
-  const [validationError, setValidationError] = useState({});
   const { token } = useSelector((state) => state.user);
   const { isFromCheckoutAddress, toggleForm } = useSelector(
     (state) => state.deliveryAddress
   );
-  let dispatch = useDispatch();
-  let navigate = useNavigate();
-
+  const [validationError, setValidationError] = useState({});
   const [wilayah, setWilayah] = useState({
     provinsi: [],
     kabupaten: [],
@@ -39,6 +36,8 @@ const AddressForm = ({ handleChangeShowForm }) => {
     kecamatan: '',
     kelurahan: '',
   });
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   // fetch data provinsi dari api
   useEffect(() => {
@@ -67,7 +66,7 @@ const AddressForm = ({ handleChangeShowForm }) => {
 
         setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
       } catch (error) {
-        `${error.message}: Tidak dapat terhubung ke API wilayah`;
+        toast.error(`${error.message} 1: Tidak dapat terhubung ke API wilayah`);
       }
     };
 
@@ -84,7 +83,7 @@ const AddressForm = ({ handleChangeShowForm }) => {
 
         setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
       } catch (error) {
-        `${error.message}: Tidak dapat terhubung ke API wilayah`;
+        toast.error(`${error.message} 2: Tidak dapat terhubung ke API wilayah`);
       }
     };
 
@@ -101,7 +100,7 @@ const AddressForm = ({ handleChangeShowForm }) => {
 
         setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
       } catch (error) {
-        `${error.message}: Tidak dapat terhubung ke API wilayah`;
+        toast.error(`${error.message} 3: Tidak dapat terhubung ke API wilayah`);
       }
     };
 
