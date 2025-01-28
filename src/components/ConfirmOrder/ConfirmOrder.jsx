@@ -8,7 +8,7 @@ import {
   setCheckoutAddress,
 } from '../../app/features/deliveryAddressSlice';
 import { setCurrentOrderId } from '../../app/features/userSlice';
-import { clearCart } from '../../app/features/cartSlice';
+// import { clearCart } from '../../app/features/cartSlice';
 import './ConfirmOrder.scss';
 import { toast } from 'react-toastify';
 
@@ -74,7 +74,6 @@ const ConfirmOrder = () => {
         dispatch(setCurrentOrderId(saveToOrder.data._id));
         dispatch(setCheckoutAddress(finalAddress.name));
         dispatch(setAddressInCheckout(false));
-        dispatch(clearCart());
         navigate('/checkout/invoice');
       }
     } catch (error) {

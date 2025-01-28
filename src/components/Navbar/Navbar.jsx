@@ -4,19 +4,25 @@ import CartButton from '../CartButton/CartButton';
 import Button from '../Button/Button';
 import logo from '../../assets/logo.png';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { FaUserCircle } from 'react-icons/fa';
 import './Navbar.scss';
 
 const Navbar = () => {
   const { full_name } = useSelector((state) => state.user);
+  let navigate = useNavigate();
 
   return (
     <header className="header">
       <nav className="navbar">
-        <a href="/">
+        <div
+          onClick={() => {
+            navigate('/');
+            window.location.reload();
+          }}
+        >
           <img src={logo} alt="logo" className="logo" />
-        </a>
+        </div>
         <CategorySelect />
         <SearchBar />
         <Link to="/cart">

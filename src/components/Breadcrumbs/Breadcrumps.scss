@@ -1,9 +1,19 @@
 .breadcrumbs-wrapper {
   margin-bottom: 1rem;
-}
+  display: flex;
+  gap: 0.5rem;
 
-.breadcrumbs-items {
-  font-size: 1.5rem;
-  color: lightslategrey;
-  font-weight: normal;
+  .breadcrumbs-items {
+    font-size: 1.5rem;
+    color: lightslategrey;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .active-crumbs {
+    color: #fa4032;
+    text-decoration: underline;
+  }
 }

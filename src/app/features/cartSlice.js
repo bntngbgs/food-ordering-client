@@ -44,7 +44,6 @@ const cartSlice = createSlice({
         state.itemCount = state.cart.length;
       }
     },
-    clearCart: () => initialState,
     countTotal: (state) => {
       let total = state.cart.map((item) => item.price * item.qty);
       // console.log(total);
@@ -52,6 +51,12 @@ const cartSlice = createSlice({
         return prev + curr;
       }, 0);
     },
+
+    clearCart: (state) => {
+      state.cart = [];
+      state.itemCount = 0;
+    },
+    resetCartState: () => initialState,
   },
 });
 
@@ -61,7 +66,10 @@ export const {
   incrementQty,
   decrementQty,
   clearCart,
+  resetCartState,
   countTotal,
+  setBreadcrumbs,
+  adjustBreadcrumbs,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
