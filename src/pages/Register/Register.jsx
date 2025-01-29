@@ -45,9 +45,9 @@ const Register = () => {
     }
 
     if (
-      userData.full_name == '' ||
-      userData.email == '' ||
-      userData.password == ''
+      userData.full_name === '' ||
+      userData.email === '' ||
+      userData.password === ''
     ) {
       return;
     }
@@ -57,6 +57,15 @@ const Register = () => {
         'http://localhost:3000/auth/register',
         userData
       );
+
+      if (user.data.error) {
+        return Object.entries(user.data.fields).forEach(([key, value]) =>
+          setValidationError((prevState) => ({
+            ...prevState,
+            [key]: value.message,
+          }))
+        );
+      }
 
       if (typeof user.data !== 'object') {
         throw Error('API Error');
