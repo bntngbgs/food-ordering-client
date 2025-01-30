@@ -1,9 +1,15 @@
+@use '../../responsive.scss' as *;
+
 .custom-dropdown {
   display: flex;
   justify-content: center;
   position: relative;
   min-width: 140px;
   height: 50px;
+
+  @include lg {
+    min-width: 118px;
+  }
 
   .custom-select {
     border: 1px solid #fa4032;
@@ -22,6 +28,11 @@
 
     option:not(option:first-of-type) {
       color: black;
+    }
+
+    @include lg {
+      font-size: 18px;
+      padding-inline: 0.25rem;
     }
   }
 

@@ -1,3 +1,5 @@
+@forward './responsive.scss';
+
 *,
 *::before,
 *::after {
@@ -66,6 +68,7 @@ h6 {
       no-repeat,
     conic-gradient(#0000 30%, #fa4032);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
   animation: l13 1s infinite linear;
   margin: auto;
   margin-top: 4rem;

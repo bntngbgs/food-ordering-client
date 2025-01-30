@@ -169,7 +169,7 @@ const Home = () => {
   return (
     <section className="home">
       {showModal && <NotAuthModal />}
-      <h1>Home</h1>
+      {/* <h1>Home</h1> */}
 
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>

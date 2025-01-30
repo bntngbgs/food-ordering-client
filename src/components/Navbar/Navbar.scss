@@ -1,6 +1,12 @@
+@use '../../responsive.scss' as *;
+
 .header {
   background-color: #fa4032;
   padding-block: 0.65rem;
+
+  @include xl {
+    // background-color: blue;
+  }
 
   .navbar {
     max-width: 1440px;
@@ -12,6 +18,10 @@
     .logo {
       max-width: 220px;
       cursor: pointer;
+
+      @include lg {
+        max-width: 186px;
+      }
     }
 
     a {
