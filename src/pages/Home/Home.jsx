@@ -22,6 +22,7 @@ import './Home.scss';
 import SkeletonCard from '../../components/Skeleton/SkeletonCard';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { toast } from 'react-toastify';
+import MobileNavigation from '../../components/MobileNavigation/MobileNavigation';
 
 const Home = () => {
   const {
@@ -213,6 +214,10 @@ const Home = () => {
       {products.length > 0 && (
         <Pagination handleCountPaginate={handleCountPaginate} />
       )}
+
+      <div className="mobile-nav-wrapper">
+        <MobileNavigation />
+      </div>
     </section>
   );
 };

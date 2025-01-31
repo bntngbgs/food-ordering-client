@@ -1,8 +1,19 @@
+@use '../../responsive.scss' as *;
+
 .cart-button {
   width: 32px;
   margin-right: 1.5rem;
   margin-left: 0.75rem;
   position: relative;
+
+  @include lg {
+    width: 30px;
+    margin-right: 1rem;
+  }
+
+  @include md {
+    display: none;
+  }
 
   .bubble {
     background-color: #ffb200;
@@ -13,10 +24,15 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-
     position: absolute;
     top: -13px;
     right: -8px;
+
+    @include lg {
+      width: 20px;
+      height: 20px;
+      top: -9px;
+    }
 
     span {
       font-size: 12px;

@@ -11,6 +11,10 @@
     min-width: 118px;
   }
 
+  @include lg {
+    min-width: 110px;
+  }
+
   .custom-select {
     border: 1px solid #fa4032;
     appearance: none;
@@ -33,6 +37,10 @@
     @include lg {
       font-size: 18px;
       padding-inline: 0.25rem;
+    }
+
+    @include md {
+      font-size: 16px;
     }
   }
 

@@ -1,7 +1,13 @@
+@use '../../responsive.scss' as *;
+
 .pagination-wrapper {
   margin-top: 2.25rem;
   display: flex;
   gap: 0.65rem;
+
+  @include lg {
+    justify-content: center;
+  }
 
   span {
     border: 1px solid lightgray;

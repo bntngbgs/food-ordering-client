@@ -6,6 +6,7 @@ import logo from '../../assets/logo.png';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router';
 import { FaUserCircle } from 'react-icons/fa';
+import { FaHamburger } from 'react-icons/fa';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -46,6 +47,10 @@ const Navbar = () => {
             </div>
           </Link>
         )}
+
+        <div className="hamburger-menu">
+          <FaHamburger color="#fff" size={28} />
+        </div>
       </nav>
     </header>
   );

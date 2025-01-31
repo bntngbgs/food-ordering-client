@@ -3,10 +3,8 @@
 .header {
   background-color: #fa4032;
   padding-block: 0.65rem;
-
-  @include xl {
-    // background-color: blue;
-  }
+  position: sticky;
+  top: 0;
 
   .navbar {
     max-width: 1440px;
@@ -21,6 +19,10 @@
 
       @include lg {
         max-width: 186px;
+      }
+
+      @include md {
+        max-width: 156px;
       }
     }
 
@@ -51,6 +53,33 @@
       p {
         font-weight: 700;
         line-height: 0.9;
+      }
+    }
+
+    .auth-wrapper {
+      @include md {
+        display: none;
+      }
+    }
+
+    button.outline {
+      @include lg {
+        font-size: 1rem;
+      }
+    }
+
+    button.filled {
+      @include lg {
+        font-size: 1rem;
+      }
+    }
+
+    .hamburger-menu {
+      display: none;
+      margin-left: 0.75rem;
+
+      @include md {
+        display: block;
       }
     }
   }

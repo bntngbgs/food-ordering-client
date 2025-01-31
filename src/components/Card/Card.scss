@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .card {
   flex: 0 1 335px;
   border: 2px solid lightgrey;
@@ -7,6 +9,16 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @include lg {
+    flex-basis: 254px;
+    // align-items: center;
+  }
+
+  @include md {
+    flex: 1 1 200px;
+    // flex-wrap: nowrap;
+  }
+
   .card-image {
     width: 100%;
   }
@@ -14,11 +26,25 @@
   .tag-wrapper {
     margin-top: 1.25rem !important;
     padding-left: 0.75rem;
+
+    .tag {
+      p {
+        @include md {
+          font-size: 10px;
+        }
+      }
+    }
   }
 
   .description {
     padding: 0 0.75rem;
     padding-top: 0.25rem;
+
+    h2 {
+      @include md {
+        font-size: 1.35rem;
+      }
+    }
   }
 
   .details {
@@ -38,6 +64,12 @@
       & > p {
         margin-top: 0.15rem;
       }
+
+      p {
+        @include md {
+          font-size: 1.15rem;
+        }
+      }
     }
 
     .cart-plus-button {
@@ -47,6 +79,10 @@
       border: none;
       border-radius: 4px;
       transition: all 0.4s ease;
+
+      @include md {
+        width: 40px;
+      }
 
       &:hover {
         // box-shadow: rgba(250, 64, 50, 0.2) 0px 8px 24px,
@@ -59,6 +95,10 @@
         width: 26px;
         margin: auto;
         padding-block: 0.25rem;
+
+        @include md {
+          width: 22px;
+        }
       }
     }
   }
