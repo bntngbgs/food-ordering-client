@@ -1,0 +1,50 @@
+.mobile-nav {
+  padding: 0.15rem 1rem;
+
+  .mobile-category-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .custom-dropdown {
+      width: 146px;
+      height: 40px;
+
+      .custom-select {
+        font-size: 1.35rem;
+        border: 2px solid white;
+        border-radius: 4px;
+        padding-inline: 0.75rem;
+      }
+
+      .arrow-wrapper {
+        top: 5px;
+        right: 9px;
+      }
+    }
+  }
+
+  .mobile-cart-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 0.85rem;
+    margin-bottom: 0.5rem;
+    justify-content: center;
+  }
+
+  .mobile-auth-wrapper {
+    display: flex;
+    margin-top: 1rem;
+
+    & button {
+      width: 100%;
+    }
+
+    & > * {
+      flex: 1;
+    }
+  }
+}

@@ -35,9 +35,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    // gap: 2rem;
-    // justify-content: center;
-    // align-items: flex-start;
+    justify-content: center;
 
     @include lg {
       justify-content: center;
@@ -62,15 +60,5 @@
     flex-wrap: wrap;
     gap: 2rem;
     // justify-content: space-between;
-  }
-
-  .mobile-nav-wrapper {
-    background-color: #fb5347;
-    color: white;
-    position: fixed;
-    top: 70px;
-    right: 0;
-    width: 400px;
-    height: 100vh;
   }
 }

@@ -5,6 +5,7 @@
   padding-block: 0.65rem;
   position: sticky;
   top: 0;
+  z-index: 99;
 
   .navbar {
     max-width: 1440px;
@@ -23,6 +24,10 @@
 
       @include md {
         max-width: 156px;
+      }
+
+      @include sm {
+        max-width: 148px;
       }
     }
 
@@ -62,6 +67,18 @@
       }
     }
 
+    .custom-dropdown {
+      @include sm {
+        display: none;
+      }
+    }
+
+    .cart-link {
+      @include md {
+        display: none;
+      }
+    }
+
     button.outline {
       @include lg {
         font-size: 1rem;
@@ -81,6 +98,41 @@
       @include md {
         display: block;
       }
+
+      .close-icon-mobile {
+        font-size: 28px;
+        @include sm {
+          font-size: 24px;
+        }
+      }
+
+      .hamburger-icon-mobile {
+        font-size: 28px;
+        @include sm {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  .mobile-nav-wrapper {
+    background-color: #fb5347;
+    color: white;
+    position: fixed;
+    top: 71px;
+    right: 0;
+    width: 360px;
+    height: 100vh;
+    transform: translateX(400px);
+    transition: all 0.3s ease-in;
+
+    &.slide-in {
+      transform: translateX(0);
+    }
+
+    @include sm {
+      top: 65px;
+      width: 100%;
     }
   }
 }

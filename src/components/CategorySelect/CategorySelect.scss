@@ -11,8 +11,8 @@
     min-width: 118px;
   }
 
-  @include lg {
-    min-width: 110px;
+  @include md {
+    min-width: 95px;
   }
 
   .custom-select {
@@ -60,6 +60,10 @@
 
     img {
       width: 30px;
+    }
+
+    @include md {
+      width: initial;
     }
   }
 }

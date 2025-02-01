@@ -9,7 +9,7 @@ import {
 import './CategorySelect.scss';
 import { toast } from 'react-toastify';
 
-const CategorySelect = () => {
+const CategorySelect = ({ handleNavMenu }) => {
   const { category } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -32,6 +32,7 @@ const CategorySelect = () => {
       document
         .querySelectorAll('.active')
         .forEach((item) => item.classList.remove('active'));
+      handleNavMenu();
     } catch (error) {
       toast.error(`${error.message}: Can't fetch product length`);
     }
