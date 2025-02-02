@@ -14,6 +14,10 @@
     align-items: center;
     margin: 0 auto;
 
+    // @include xs {
+    //   justify-content: space-between;
+    // }
+
     .logo {
       max-width: 220px;
       cursor: pointer;
@@ -29,10 +33,19 @@
       @include sm {
         max-width: 148px;
       }
+      @include xs {
+        max-width: 186px;
+      }
     }
 
     a {
       text-decoration: none;
+    }
+
+    .searchbar-wrapper {
+      @include xs {
+        display: none;
+      }
     }
 
     .account-wrapper {
@@ -77,6 +90,11 @@
       @include md {
         display: none;
       }
+
+      @include xs {
+        display: flex;
+        margin-left: auto;
+      }
     }
 
     button.outline {
@@ -99,17 +117,30 @@
         display: block;
       }
 
+      // @include xs {
+      //   margin-left: auto;
+      // }
+
       .close-icon-mobile {
         font-size: 28px;
         @include sm {
           font-size: 24px;
         }
+
+        @include xs {
+          font-size: 30px;
+        }
       }
 
       .hamburger-icon-mobile {
         font-size: 28px;
+
         @include sm {
           font-size: 24px;
+        }
+
+        @include xs {
+          font-size: 30px;
         }
       }
     }
@@ -131,6 +162,7 @@
     }
 
     @include sm {
+      transform: translateX(600px);
       top: 65px;
       width: 100%;
     }

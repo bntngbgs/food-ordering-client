@@ -24,6 +24,7 @@ const MobileNavigation = ({ showCategory, handleNavMenu }) => {
         </Link>
       </div>
       <hr />
+
       <div className="mobile-auth-wrapper">
         <Link to="/register" onClick={handleNavMenu}>
           <Button variant="outline" text="Register" />

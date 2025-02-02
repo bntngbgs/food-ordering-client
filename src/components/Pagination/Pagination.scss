@@ -4,10 +4,10 @@
   margin-top: 2.25rem;
   display: flex;
   gap: 0.65rem;
+  justify-content: center;
 
-  @include lg {
-    justify-content: center;
-  }
+  // @include lg {
+  // }
 
   span {
     border: 1px solid lightgray;

@@ -21,6 +21,10 @@
 
   .card-image {
     width: 100%;
+
+    // @include sm {
+    //   width: 200px;
+    // }
   }
 
   .tag-wrapper {

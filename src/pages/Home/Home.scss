@@ -7,6 +7,10 @@
   margin-top: 2rem;
   margin-bottom: 4rem;
 
+  @include xs {
+    margin-top: 1.5rem;
+  }
+
   h1 {
     color: lightslategrey;
     font-weight: normal;
@@ -19,14 +23,30 @@
     align-items: center;
     gap: 0.25rem;
 
+    .tag {
+      p {
+        @include xs {
+          font-size: 10px;
+        }
+      }
+    }
+
     span {
       font-weight: bold;
       font-size: 1.25rem;
+      line-height: 0;
     }
 
     .skeleton.tags {
       width: 82px;
       height: 25px;
+      margin: 0;
+      margin-bottom: 0.15rem;
+
+      @include xs {
+        width: 64px;
+        height: 20px;
+      }
     }
   }
 
@@ -37,12 +57,33 @@
     gap: 2rem;
     justify-content: center;
 
-    @include lg {
-      justify-content: center;
-    }
-
     @include md {
       gap: 1.35rem;
+    }
+
+    @include xs {
+      margin-top: 2rem;
+    }
+  }
+
+  .search-wrapper {
+    display: none;
+
+    .searchbar-wrapper {
+      input {
+        border-color: #fa4032;
+        border-width: 2px;
+      }
+    }
+
+    .icon-wrapper {
+      border-color: #fa4032;
+      border-width: 2px;
+    }
+
+    @include xs {
+      display: block;
+      // margin-top: 3rem;
     }
   }
 
@@ -59,6 +100,20 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    // justify-content: space-between;
+
+    // gap: 2rem;
+    justify-content: center;
+
+    @include lg {
+      justify-content: center;
+    }
+
+    @include md {
+      gap: 1.35rem;
+    }
+
+    @include xs {
+      margin-top: 2rem;
+    }
   }
 }

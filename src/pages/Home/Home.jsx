@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Tags from '../../components/Tags/Tags';
 import Card from '../../components/Card/Card';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import Pagination from '../../components/Pagination/Pagination';
 import NotAuthModal from '../../components/notAuthModal/NotAuthModal';
 import { useEffect, useState } from 'react';
@@ -169,7 +170,10 @@ const Home = () => {
   return (
     <section className="home">
       {showModal && <NotAuthModal />}
-      {/* <h1>Home</h1> */}
+
+      <div className="search-wrapper">
+        <SearchBar />
+      </div>
 
       <div className="tag-wrapper" onClick={handleClickTags}>
         <span>Tags : </span>

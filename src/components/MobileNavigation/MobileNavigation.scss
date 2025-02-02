@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .mobile-nav {
   padding: 0.15rem 1rem;
 
@@ -33,11 +35,26 @@
     margin-top: 0.85rem;
     margin-bottom: 0.5rem;
     justify-content: center;
+
+    @include xs {
+      display: none;
+    }
   }
 
   .mobile-auth-wrapper {
     display: flex;
     margin-top: 1rem;
+
+    @include xs {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    & button.filled {
+      @include xs {
+        margin-left: 0;
+      }
+    }
 
     & button {
       width: 100%;
@@ -45,6 +62,12 @@
 
     & > * {
       flex: 1;
+    }
+  }
+
+  hr:last-of-type {
+    @include xs {
+      display: none;
     }
   }
 }

@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .skeleton {
   background-color: #ddd;
   margin: 10px 0;
@@ -5,7 +7,17 @@
 }
 
 .skeleton-wrapper {
-  flex: 1 1 335px;
+  flex: 0 1 335px;
+
+  @include lg {
+    flex: 0 1 254px;
+    // align-items: center;
+  }
+
+  @include md {
+    flex: 1 1 200px;
+    // flex-wrap: nowrap;
+  }
 }
 
 .skeleton-card {
@@ -13,6 +25,10 @@
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 8px;
+
+  @include md {
+    padding: 0.5rem;
+  }
 
   .skeleton-card-tags-wrapper {
     display: flex;

@@ -8,10 +8,12 @@ import {
 } from '../../app/features/productsSlice';
 import './CategorySelect.scss';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 const CategorySelect = ({ handleNavMenu }) => {
   const { category } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const handleSelect = async (e) => {
     const selectedOption = e.target.value;
@@ -19,8 +21,6 @@ const CategorySelect = ({ handleNavMenu }) => {
       const productLength = await axios.get(
         `http://localhost:3000/api/products?category=${selectedOption}`
       );
-
-      console.log(productLength);
 
       if (!Array.isArray(productLength.data.data)) {
         throw Error('API Error');
@@ -32,7 +32,8 @@ const CategorySelect = ({ handleNavMenu }) => {
       document
         .querySelectorAll('.active')
         .forEach((item) => item.classList.remove('active'));
-      handleNavMenu();
+      if (handleNavMenu) handleNavMenu();
+      navigate('/');
     } catch (error) {
       toast.error(`${error.message}: Can't fetch product length`);
     }
@@ -49,10 +50,18 @@ const CategorySelect = ({ handleNavMenu }) => {
         <option value="" selected={category === ''}>
           Kategori
         </option>
-        <option value="utama">Utama</option>
-        <option value="minuman">Minuman</option>
-        <option value="snack">Snack</option>
-        <option value="pastry">Pastry</option>
+        <option value="utama" selected={category === 'utama'}>
+          Utama
+        </option>
+        <option value="minuman" selected={category === 'minuman'}>
+          Minuman
+        </option>
+        <option value="snack" selected={category === 'snack'}>
+          Snack
+        </option>
+        <option value="pastry" selected={category === 'pastry'}>
+          Pastry
+        </option>
       </select>
       <div className="arrow-wrapper">
         <img src={arrowDown} />
