@@ -1,5 +1,12 @@
+@use '../../responsive.scss' as *;
+
 .user-profile {
-  padding-inline: 2rem;
+  padding-left: 2rem;
+  max-width: 684px;
+
+  @include md {
+    padding-left: 1rem;
+  }
 
   h3 {
     margin-bottom: 0.5rem;
@@ -24,7 +31,11 @@
     }
 
     tr td:first-child {
-      width: 15%;
+      width: 25%;
+
+      @include md {
+        width: 35%;
+      }
     }
   }
 }

@@ -3,8 +3,12 @@ import CartButton from '../CartButton/CartButton';
 import Button from '../Button/Button';
 import './MobileNavigation.scss';
 import CategorySelect from '../CategorySelect/CategorySelect';
+import { useSelector } from 'react-redux';
+import { FaUserCircle } from 'react-icons/fa';
 
 const MobileNavigation = ({ showCategory, handleNavMenu }) => {
+  const { role, full_name } = useSelector((state) => state.user);
+
   return (
     <div className="mobile-nav">
       {showCategory && (
@@ -26,12 +30,23 @@ const MobileNavigation = ({ showCategory, handleNavMenu }) => {
       <hr />
 
       <div className="mobile-auth-wrapper">
-        <Link to="/register" onClick={handleNavMenu}>
-          <Button variant="outline" text="Register" />
-        </Link>
-        <Link to="/login" onClick={handleNavMenu}>
-          <Button variant="filled" text="Login" />
-        </Link>
+        {role === 'user' ? (
+          <Link to="/user/profile" onClick={handleNavMenu}>
+            <div className="account-wrapper">
+              <FaUserCircle color="white" size={26} />
+              <p>{full_name}</p>
+            </div>
+          </Link>
+        ) : (
+          <>
+            <Link to="/register" onClick={handleNavMenu}>
+              <Button variant="outline" text="Register" />
+            </Link>
+            <Link to="/login" onClick={handleNavMenu}>
+              <Button variant="filled" text="Login" />
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

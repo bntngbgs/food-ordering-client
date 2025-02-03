@@ -48,6 +48,12 @@
       }
     }
 
+    a[href='/user/profile'] {
+      @include md {
+        display: none;
+      }
+    }
+
     .account-wrapper {
       display: flex;
       align-items: center;
@@ -164,6 +170,9 @@
     @include sm {
       transform: translateX(600px);
       top: 65px;
+    }
+
+    @include xs {
       width: 100%;
     }
   }

@@ -1,5 +1,8 @@
+@use '../../responsive.scss' as *;
+
 .login-page {
   max-width: 1440px;
+  width: 90%;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -11,12 +14,21 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.35rem;
+
+    @include sm {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
   }
 
   .login-form {
     display: flex;
     flex-direction: column;
     width: 380px;
+
+    @include xs {
+      width: 100%;
+    }
   }
 
   input[id='email'],

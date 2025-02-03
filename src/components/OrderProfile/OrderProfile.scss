@@ -1,6 +1,12 @@
+@use '../../responsive.scss' as *;
+
 .order-profile {
-  padding-inline: 2rem;
+  padding-left: 2rem;
   // position: relative;
+
+  @include lg {
+    width: 100%;
+  }
 
   .empty-order {
     font-size: 1.45rem;
