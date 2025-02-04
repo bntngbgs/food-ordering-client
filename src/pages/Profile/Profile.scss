@@ -8,6 +8,10 @@
     padding-left: 1rem;
   }
 
+  @include sm {
+    padding-left: 0;
+  }
+
   h3 {
     margin-bottom: 0.5rem;
   }

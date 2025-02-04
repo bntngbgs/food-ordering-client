@@ -4,8 +4,8 @@
   padding-left: 2rem;
   // position: relative;
 
-  @include lg {
-    width: 100%;
+  @include sm {
+    padding-left: 0;
   }
 
   .empty-order {
@@ -129,7 +129,12 @@
 
   table {
     width: 100%;
+    // min-width: 600px;
     border-collapse: collapse;
+
+    // @include md {
+    //   table-layout: auto;
+    // }
 
     th {
       background-color: #fa4032;
