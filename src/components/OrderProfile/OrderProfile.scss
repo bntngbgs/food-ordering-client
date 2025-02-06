@@ -3,9 +3,21 @@
 .order-profile {
   padding-left: 2rem;
   // position: relative;
+  max-width: 684px;
+
+  @include md {
+    padding-left: 0;
+    // max-width: 500px;
+    overflow-x: scroll;
+  }
 
   @include sm {
     padding-left: 0;
+    overflow-x: hidden;
+  }
+
+  @include xs {
+    overflow-x: scroll;
   }
 
   .empty-order {
@@ -129,12 +141,21 @@
 
   table {
     width: 100%;
-    // min-width: 600px;
+    // overflow-x: scroll;
     border-collapse: collapse;
 
-    // @include md {
-    //   table-layout: auto;
-    // }
+    @include md {
+      width: 600px;
+      // overflow-x: scroll;
+    }
+
+    @include sm {
+      width: 100%;
+    }
+
+    @include xs {
+      width: 600px;
+    }
 
     th {
       background-color: #fa4032;
@@ -149,6 +170,10 @@
     td {
       padding-block: 0.65rem;
       text-align: center;
+
+      @include sm {
+        font-size: 0.85rem;
+      }
     }
 
     tbody {

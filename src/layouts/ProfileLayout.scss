@@ -66,6 +66,7 @@
 
     @include md {
       width: 100%;
+      // overflow-x: scroll;
     }
 
     @include sm {
@@ -76,13 +77,30 @@
     .expanded {
       flex: 1;
 
+      @include md {
+        // width: 100%;
+        overflow: hidden;
+        padding-left: 1rem;
+        // flex: none;
+        // min-width: 500px;
+        // overflow-x: scroll;
+      }
+
       @include sm {
+        padding-left: 0;
         margin-top: 1.5rem;
       }
     }
 
     .side-bar {
       width: max-content;
+
+      @include md {
+        // width: 100%;
+        flex: none;
+        // min-width: 500px;
+        // overflow-x: scroll;
+      }
 
       @include sm {
         width: 100%;
@@ -132,7 +150,7 @@
         p {
           font-size: 1.25rem;
 
-          @include sm {
+          @include md {
             font-size: 1.15rem;
           }
 
