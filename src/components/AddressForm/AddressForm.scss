@@ -1,7 +1,13 @@
+@use '../../responsive.scss' as *;
+
 .address-form-wrapper {
   display: flex;
   margin-top: 1rem;
   gap: 1.5rem;
+
+  @include md {
+    flex-wrap: wrap;
+  }
 
   .address-name {
     flex: 1;

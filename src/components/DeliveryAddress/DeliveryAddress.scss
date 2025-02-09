@@ -1,6 +1,18 @@
+@use '../../responsive.scss' as *;
+
 .address-profile {
   width: 100%;
   // background-color: blue;
+
+  // @include md {
+  //   overflow-x: scroll;
+  // }
+
+  &:has(table) {
+    @include md {
+      overflow-x: scroll;
+    }
+  }
 
   .empty-address {
     font-size: 1.45rem;
@@ -15,6 +27,14 @@
     border-collapse: collapse;
     margin-top: 1rem;
 
+    @include md {
+      width: 800px;
+    }
+
+    @include sm {
+      width: 600px;
+    }
+
     th {
       background-color: #fa4032;
       padding-block: 0.48rem;
@@ -26,10 +46,26 @@
     td {
       padding-left: 0.75rem;
       padding-block: 0.65rem;
+
+      @include sm {
+        font-size: 0.85rem;
+      }
+    }
+
+    tr:nth-of-type(2n - 1) {
+      background-color: rgb(247, 247, 247);
     }
 
     tr td:first-child {
       width: 30%;
+
+      @include md {
+        width: 20%;
+      }
+
+      // @include sm {
+      //   width: 15%;
+      // }
     }
   }
 }

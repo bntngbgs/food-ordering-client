@@ -1,5 +1,11 @@
+@use '../../responsive.scss' as *;
+
 .address-profile {
   padding-left: 2rem;
+
+  @include md {
+    padding-left: 0;
+  }
 
   .add-address {
     background-color: #ffb200;
@@ -13,6 +19,10 @@
     &:hover {
       background-color: #ffd166;
       border: 1px solid #ffd166;
+    }
+
+    @include sm {
+      font-size: 0.85rem;
     }
   }
 }
