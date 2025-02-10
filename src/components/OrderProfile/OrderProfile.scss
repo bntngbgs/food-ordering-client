@@ -76,64 +76,111 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 99;
 
-    .close-button {
-      position: absolute;
-      top: 100px;
-      right: 445px;
-      cursor: pointer;
-    }
+    .invoice-modal {
+      position: relative;
+      width: 50%;
+      margin-inline: auto;
 
-    .invoice-table-wrapper {
-      .skeleton-invoice {
-        thead {
-          th {
-            padding-block: 0.75rem;
-          }
+      @include xl {
+        width: 60%;
+      }
 
-          th:last-child {
-            padding-right: 1rem;
+      @include lg {
+        width: 70%;
+      }
 
-            .skeleton {
-              margin-left: auto;
-            }
-          }
+      @include sm {
+        width: 90%;
+      }
+
+      @include xs {
+        width: 95%;
+      }
+
+      .close-button {
+        position: absolute;
+        font-size: 48px;
+        // top: 100px;
+        // right: 445px;
+        top: -60px;
+        right: -10px;
+        cursor: pointer;
+
+        @include lg {
+          font-size: 42px;
+          top: -45px;
         }
-        .skeleton {
-          margin: 0;
+
+        @include md {
+          font-size: 38px;
+          top: -42px;
         }
 
-        tbody {
-          tr:nth-child(4) {
-            .skeleton:nth-child(2) {
-              margin-block: 10px;
-            }
-          }
+        @include sm {
+          font-size: 32px;
+          top: -35px;
+          right: -6px;
+        }
+      }
 
-          tr:nth-child(5) {
-            td:nth-child(2) {
-              .skeleton.tags {
-                margin-top: 6px;
+      .invoice-table-wrapper {
+        .skeleton-invoice {
+          thead {
+            th {
+              padding-block: 0.75rem;
+            }
+
+            th:last-child {
+              padding-right: 1rem;
+
+              .skeleton {
+                margin-left: auto;
               }
             }
           }
+          .skeleton {
+            margin: 0;
+          }
+
+          tbody {
+            tr:nth-child(4) {
+              .skeleton:nth-child(2) {
+                margin-block: 10px;
+              }
+            }
+
+            tr:nth-child(5) {
+              td:nth-child(2) {
+                .skeleton.tags {
+                  margin-top: 6px;
+                }
+              }
+            }
+          }
+
+          // .skeleton:nth-child(3) {
+          //   background-color: blue;
+          //   margin-block: 10px;
+          // }
+        }
+      }
+
+      table {
+        margin-top: 10rem;
+        width: 100%;
+        margin-inline: auto;
+
+        @include xxs {
+          margin-top: 5rem;
         }
 
-        // .skeleton:nth-child(3) {
-        //   background-color: blue;
-        //   margin-block: 10px;
-        // }
-      }
-    }
-
-    table {
-      margin-top: 10rem;
-      width: 70%;
-
-      tr {
-        td {
-          text-align: left;
-          background-color: #fff;
+        tr {
+          td {
+            text-align: left;
+            background-color: #fff;
+          }
         }
       }
     }

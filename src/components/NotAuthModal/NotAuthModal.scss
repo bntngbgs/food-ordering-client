@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .modal-wrapper {
   position: fixed;
   top: 0;
@@ -18,9 +20,42 @@
     padding: 3rem 3rem 1.75rem 3rem;
     border-radius: 8px;
 
+    @include sm {
+      padding-inline: 2rem;
+      width: 90%;
+    }
+
+    @include xs {
+      padding-inline: 1rem;
+    }
+
     p {
       margin-top: 0.15rem;
       font-size: 1.5rem;
+
+      @include sm {
+        font-size: 1.25rem;
+      }
+
+      @include xs {
+        font-size: 1.15rem;
+      }
+
+      @include xxs {
+        font-size: 1rem;
+      }
+    }
+
+    .warning-icon {
+      font-size: 96px;
+
+      @include sm {
+        font-size: 82px;
+      }
+
+      @include xs {
+        font-size: 64px;
+      }
     }
   }
 
@@ -30,9 +65,26 @@
     margin-top: 1.5rem;
     width: 100%;
 
+    @include sm {
+      padding-inline: 1.25rem;
+      margin-top: 0.85rem;
+    }
+
+    @include xs {
+      padding-inline: 0;
+    }
+
     button {
       flex: 1;
       width: 100%;
+
+      @include sm {
+        font-size: 1rem;
+      }
+
+      @include xs {
+        font-size: 0.95rem;
+      }
     }
 
     a {

@@ -157,15 +157,16 @@ const OrderProfile = () => {
 
       {showInvoice && (
         <div className="invoice-modal-wrapper">
-          <div className="close-button-wrapper">
-            <IoClose
-              color={'#ffb200'}
-              size={48}
-              onClick={() => handleClickInvoice()}
-              className="close-button"
-            />
+          <div className="invoice-modal">
+            <div className="close-button-wrapper">
+              <IoClose
+                color={'#ffb200'}
+                onClick={() => handleClickInvoice()}
+                className="close-button"
+              />
+            </div>
+            <InvoiceDetails />
           </div>
-          <InvoiceDetails />
         </div>
       )}
     </div>

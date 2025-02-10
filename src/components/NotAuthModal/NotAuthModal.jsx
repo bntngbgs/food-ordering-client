@@ -16,7 +16,7 @@ const NotAuthModal = () => {
   return (
     <div className="modal-wrapper">
       <div className="modal-description">
-        <IoWarning size={96} color="#ffaa22" />
+        <IoWarning color="#ffaa22" className="warning-icon" />
         <p>Please login first to add product!</p>
         <button type="button" className="close-modal" onClick={handleClick}>
           <IoClose size={24} />
