@@ -32,7 +32,7 @@ const CartItem = ({ img, title, price, qty }) => {
         <p>{title}</p>
       </td>
       <td>
-        <p>{price}</p>
+        <p>{Intl.NumberFormat('id-ID').format(price)}</p>
       </td>
       <td align="center">
         <span onClick={handleDecrement}>-</span>

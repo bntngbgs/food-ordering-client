@@ -1,5 +1,8 @@
+@use '../../responsive.scss' as *;
+
 .cart-page {
   max-width: 1440px;
+  width: 90%;
   margin-inline: auto;
   margin-top: 2rem;
   margin-bottom: 4rem;
@@ -14,6 +17,10 @@
 
   h2 {
     font-size: 2rem;
+
+    @include sm {
+      font-size: 1.75rem;
+    }
   }
 
   table {
@@ -28,6 +35,12 @@
       color: white;
     }
 
+    tbody {
+      tr:nth-of-type(2n - 1) {
+        background-color: rgb(247, 247, 247);
+      }
+    }
+
     tr {
       td,
       th {
@@ -37,11 +50,30 @@
 
       th:first-child {
         padding-left: 5rem;
+
+        @include md {
+          padding-left: 2rem;
+
+          width: initial;
+        }
       }
 
       td:first-child {
         padding-left: 3rem;
         width: 380px;
+
+        @include lg {
+          width: 280px;
+        }
+
+        @include md {
+          padding-left: 1rem;
+          width: initial;
+        }
+
+        // @include sm {
+        //   width: 100px;
+        // }
       }
 
       span {
