@@ -34,7 +34,7 @@ const Invoice = () => {
     <div className="invoice-wrapper">
       <InvoiceDetails />
 
-      <div className="checkout-button-wrapper">
+      <div className="invoice-button-wrapper">
         {/* <a href="/"> */}
         <Button
           variant="outline-reversed"

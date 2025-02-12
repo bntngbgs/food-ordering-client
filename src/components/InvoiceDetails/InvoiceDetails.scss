@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .invoice-table-wrapper {
   max-width: 1440px;
   margin: auto;
@@ -7,6 +9,18 @@
     border-collapse: collapse;
     margin-inline: auto;
     margin-top: 2rem;
+
+    @include lg {
+      width: 90%;
+    }
+
+    @include md {
+      width: 95%;
+    }
+
+    @include sm {
+      width: 100%;
+    }
 
     thead {
       color: white;
@@ -49,11 +63,55 @@
         td {
           padding: 1rem;
 
+          @include md {
+            font-size: 1rem;
+          }
+
+          @include sm {
+            font-size: 0.95rem;
+          }
+
+          @include xs {
+            font-size: 0.85rem;
+          }
+
           &:first-child {
             width: 180px;
+
+            @include sm {
+              width: 140px;
+            }
+
+            @include xs {
+              width: 120px;
+            }
           }
         }
       }
     }
+  }
+}
+
+.invoice-button-wrapper {
+  width: 70%;
+  margin: auto;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+
+  @include lg {
+    width: 90%;
+  }
+
+  @include md {
+    width: 95%;
+  }
+
+  @include sm {
+    width: 100%;
+  }
+
+  a {
+    text-decoration: none;
   }
 }

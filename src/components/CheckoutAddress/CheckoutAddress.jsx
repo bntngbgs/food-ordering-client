@@ -64,41 +64,52 @@ const CheckoutAddress = () => {
   };
 
   return (
-    <div className="address-table-wrapper">
+    <>
       <h1>Pilih Alamat Pengiriman</h1>
-      {isLoading && (
-        <div className="address-loader">
-          <div className="loader"></div>
-        </div>
-      )}
-      {address.length > 0 && !isLoading && (
-        <table className="address-table">
-          <thead>
-            <tr>
-              <td></td>
-              <td>Nama</td>
-              <td>Detail</td>
-            </tr>
-          </thead>
-          <tbody>
-            {address.map((item, index) => (
-              <tr key={index}>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="address"
-                    id={item._id}
-                    onChange={handleChange}
-                    checked={selectedAddress === item._id}
-                  />
-                </td>
-                <td>{item.nama}</td>
-                <td>{`${item.provinsi}, ${item.kabupaten}, ${item.kecamatan}, ${item.kelurahan}, ${item.detail}`}</td>
+      <div className="address-table-wrapper">
+        {isLoading && (
+          <div className="address-loader">
+            <div className="loader"></div>
+          </div>
+        )}
+        {address.length > 0 && !isLoading && (
+          <table className="address-table">
+            <thead>
+              <tr>
+                <td></td>
+                <td>Nama</td>
+                <td>Detail</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {address.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="address"
+                      id={item._id}
+                      onChange={handleChange}
+                      checked={selectedAddress === item._id}
+                    />
+                  </td>
+                  <td>{item.nama}</td>
+                  <td>{`${item.provinsi}, ${item.kabupaten}, ${item.kecamatan}, ${item.kelurahan}, ${item.detail}`}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        {address.length < 1 && !isLoading && (
+          <div className="checkout-address-empty">
+            <h2>Anda belum memiliki alamat pengiriman.</h2>
+            <Link to="/user/address" onClick={handleAddAddress}>
+              Tambah alamat
+            </Link>
+          </div>
+        )}
+      </div>
       {address.length > 0 && !isLoading && (
         <div className="checkout-button-wrapper">
           <Button
@@ -114,15 +125,7 @@ const CheckoutAddress = () => {
           />
         </div>
       )}
-      {address.length < 1 && !isLoading && (
-        <div className="checkout-address-empty">
-          <h2>Anda belum memiliki alamat pengiriman.</h2>
-          <Link to="/user/address" onClick={handleAddAddress}>
-            Tambah alamat
-          </Link>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 export default CheckoutAddress;

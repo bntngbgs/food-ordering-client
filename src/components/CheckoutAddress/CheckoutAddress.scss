@@ -1,8 +1,28 @@
 @use '../../responsive.scss' as *;
 
+h1 {
+  @include sm {
+    font-size: 1.75rem;
+  }
+
+  @include xs {
+    font-size: 1.65rem;
+  }
+  @include xxs {
+    font-size: 1.5rem;
+  }
+}
+
 .address-table-wrapper {
   width: 100%;
-  margin-bottom: 4rem;
+  // margin-bottom: 4rem;
+
+  &:has(table) {
+    @include sm {
+      overflow-x: scroll;
+      padding-bottom: 0.45rem;
+    }
+  }
 
   .address-loader {
     width: 100%;
@@ -12,6 +32,10 @@
     width: 100%;
     margin-top: 1.5rem;
     border-collapse: collapse;
+
+    @include sm {
+      width: 800px;
+    }
 
     thead {
       background-color: #fa4032;
@@ -30,6 +54,10 @@
 
       @include md {
         font-size: 1rem;
+      }
+
+      @include xs {
+        font-size: 0.95rem;
       }
 
       td {
@@ -80,20 +108,26 @@
       }
     }
   }
+}
 
-  .checkout-button-wrapper {
-    width: 100%;
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
+.checkout-button-wrapper {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
 
-    .outline-reversed {
-      transition: all 0.3s ease;
+  button {
+    @include xs {
+      font-size: 1rem;
+    }
+  }
 
-      &:hover:enabled {
-        background-color: #fa4032;
-        color: white;
-      }
+  .outline-reversed {
+    transition: all 0.3s ease;
+
+    &:hover:enabled {
+      background-color: #fa4032;
+      color: white;
     }
   }
 }
