@@ -22,27 +22,29 @@ const Cart = () => {
           Anda belum menambahkan produk ke keranjang.
         </p>
       ) : (
-        <div className="cart-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Gambar</th>
-                <th>Barang</th>
-                <th>Harga</th>
-                <th align="center">Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart &&
-                cart.map((item, index) => <CardItem key={index} {...item} />)}
-            </tbody>
-          </table>
+        <>
+          <div className="cart-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Gambar</th>
+                  <th>Barang</th>
+                  <th>Harga</th>
+                  <th align="center">Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart &&
+                  cart.map((item, index) => <CardItem key={index} {...item} />)}
+              </tbody>
+            </table>
+          </div>
           <Button
             variant="outline-reversed"
             text="Checkout"
             handleClick={handleUpdateCart}
           />
-        </div>
+        </>
       )}
     </section>
   );

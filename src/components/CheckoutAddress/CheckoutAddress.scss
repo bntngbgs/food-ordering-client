@@ -1,3 +1,5 @@
+@use '../../responsive.scss' as *;
+
 .address-table-wrapper {
   width: 100%;
   margin-bottom: 4rem;
@@ -26,14 +28,18 @@
     tbody {
       font-size: 1.15rem;
 
+      @include md {
+        font-size: 1rem;
+      }
+
       td {
         padding-block: 1rem;
         padding-inline: 0.5rem;
         text-align: center;
         border-bottom: 1px solid #fa4032;
 
-        &:first-child {
-          padding-inline: 0.5rem;
+        &:last-child {
+          padding-inline: 1.5rem;
         }
 
         input[type='checkbox'] {

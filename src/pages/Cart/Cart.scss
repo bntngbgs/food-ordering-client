@@ -21,12 +21,28 @@
     @include sm {
       font-size: 1.75rem;
     }
+
+    @include xxs {
+      font-size: 1.5rem;
+    }
+  }
+
+  .cart-table {
+    &:has(table) {
+      @include xxs {
+        overflow-x: scroll;
+      }
+    }
   }
 
   table {
     width: 100%;
     margin-top: 2rem;
     border-collapse: collapse;
+
+    @include xxs {
+      width: 420px;
+    }
 
     thead {
       text-align: left;
@@ -48,13 +64,41 @@
         padding-left: 0.85rem;
       }
 
+      th {
+        @include sm {
+          font-size: 1rem;
+          padding-left: 0;
+          text-align: center;
+        }
+      }
+
       th:first-child {
         padding-left: 5rem;
 
         @include md {
           padding-left: 2rem;
-
           width: initial;
+        }
+
+        @include sm {
+          font-size: 1rem;
+          padding-left: 0;
+          text-align: center;
+        }
+      }
+
+      td {
+        font-size: 1.25rem;
+
+        @include lg {
+          font-size: 1.15rem;
+        }
+
+        @include sm {
+          font-size: 1rem;
+          width: 80px;
+          text-align: center;
+          padding-left: 0;
         }
       }
 
@@ -71,6 +115,11 @@
           width: initial;
         }
 
+        @include sm {
+          width: 80px;
+          padding-left: 0.35rem;
+        }
+
         // @include sm {
         //   width: 100px;
         // }
@@ -80,6 +129,10 @@
         display: inline-block;
         padding: 0 0.5rem;
         font-size: 1.25rem;
+
+        @include md {
+          font-size: 1rem;
+        }
       }
 
       span:first-of-type {
@@ -87,21 +140,47 @@
         font-weight: 700;
         color: white;
         margin-right: 0.5rem;
+
+        @include md {
+          margin-right: 0.25rem;
+        }
+
+        @include xs {
+          margin-right: 0;
+        }
       }
+
       span:last-of-type {
         background-color: #fa4032;
         font-weight: 700;
         color: white;
         margin-left: 0.5rem;
+
+        @include md {
+          margin-left: 0.25rem;
+        }
+
+        @include xs {
+          margin-left: 0;
+        }
       }
     }
   }
 
   .table-image {
-    width: 120px;
+    width: 140px;
+
+    @include lg {
+      width: 120px;
+    }
+
+    @include sm {
+      width: 100px;
+    }
   }
 
   button {
     width: 100%;
+    margin-top: 0.5rem;
   }
 }
