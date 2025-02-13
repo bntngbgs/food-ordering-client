@@ -48,64 +48,112 @@ const AddressForm = ({ handleChangeShowForm }) => {
         );
 
         setWilayah((prev) => ({ ...prev, provinsi: response.data }));
+
+        if (id.provinsi) {
+          getKabupaten();
+        }
+
+        if (id.kabupaten) {
+          getKecamatan();
+        }
+
+        if (id.kecamatan) {
+          getKelurahan();
+        }
       } catch (error) {
         toast.error(`${error.message}: Tidak dapat terhubung ke API wilayah`);
       }
     };
 
     getWilayahApi();
-  }, []);
+  }, [id.provinsi, id.kabupaten, id.kecamatan]);
+
+  const getKabupaten = async () => {
+    try {
+      let response = await axios.get(
+        `https://bntngbgs.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
+      );
+
+      setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
+    } catch (error) {
+      toast.error(`${error.message} 1: Tidak dapat terhubung ke API wilayah`);
+    }
+  };
+
+  const getKecamatan = async () => {
+    try {
+      let response = await axios.get(
+        `https://bntngbgs.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
+      );
+
+      setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
+    } catch (error) {
+      toast.error(`${error.message} 2: Tidak dapat terhubung ke API wilayah`);
+    }
+  };
+
+  const getKelurahan = async () => {
+    try {
+      let response = await axios.get(
+        `https://bntngbgs.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
+      );
+
+      setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
+    } catch (error) {
+      toast.error(`${error.message} 3: Tidak dapat terhubung ke API wilayah`);
+    }
+  };
 
   // fetch data kabupaten dari api setelah id.provinsi ter-set
-  useEffect(() => {
-    const getWilayahApi = async () => {
-      try {
-        let response = await axios.get(
-          `https://bntngbgs.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
-        );
+  // useEffect(() => {
+  //   const getWilayahApi = async () => {
+  //     try {
+  //       let response = await axios.get(
+  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
+  //       );
 
-        setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
-      } catch (error) {
-        toast.error(`${error.message} 1: Tidak dapat terhubung ke API wilayah`);
-      }
-    };
+  //       setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
+  //     } catch (error) {
+  //       toast.error(`${error.message} 1: Tidak dapat terhubung ke API wilayah`);
+  //     }
+  //   };
 
-    getWilayahApi();
-  }, [id.provinsi]);
+  //   getWilayahApi();
+  // }, [id.provinsi]);
 
   // fetch data kecamatan dari api setelah id.kabupaten ter-set
-  useEffect(() => {
-    const getWilayahApi = async () => {
-      try {
-        let response = await axios.get(
-          `https://bntngbgs.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
-        );
+  // useEffect(() => {
+  //   const getWilayahApi = async () => {
+  //     try {
+  //       let response = await axios.get(
+  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
+  //       );
 
-        setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
-      } catch (error) {
-        toast.error(`${error.message} 2: Tidak dapat terhubung ke API wilayah`);
-      }
-    };
+  //       setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
+  //     } catch (error) {
+  //       toast.error(`${error.message} 2: Tidak dapat terhubung ke API wilayah`);
+  //     }
+  //   };
 
-    getWilayahApi();
-  }, [id.kabupaten]);
+  //   getWilayahApi();
+  // }, [id.kabupaten]);
 
   // fetch data kelurahan dari api setelah id.kecamatan ter-set
-  useEffect(() => {
-    const getWilayahApi = async () => {
-      try {
-        let response = await axios.get(
-          `https://bntngbgs.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
-        );
+  // useEffect(() => {
+  //   const getWilayahApi = async () => {
+  //     try {
+  //       let response = await axios.get(
+  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
+  //       );
 
-        setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
-      } catch (error) {
-        toast.error(`${error.message} 3: Tidak dapat terhubung ke API wilayah`);
-      }
-    };
+  //       setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
+  //     } catch (error) {
+  //       toast.error(`${error.message} 3: Tidak dapat terhubung ke API wilayah`);
+  //     }
+  //   };
 
-    getWilayahApi();
-  }, [id.kecamatan]);
+  //   getWilayahApi();
+  // }, [id.kecamatan]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -186,6 +234,19 @@ const AddressForm = ({ handleChangeShowForm }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+
+      console.log(response);
+
+      if (response.data.error) {
+        // console.log(1);
+        // return;
+        return Object.entries(response.data.field).forEach(([key, value]) =>
+          setValidationError((prevState) => ({
+            ...prevState,
+            [key]: value.message,
+          }))
+        );
+      }
 
       if (typeof response.data !== 'object') {
         throw Error('API Error');

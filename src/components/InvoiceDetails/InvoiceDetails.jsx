@@ -8,11 +8,13 @@ import { toast } from 'react-toastify';
 
 const InvoiceDetails = () => {
   const [invoice, setInvoice] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { currentOrderId, token } = useSelector((state) => state.user);
   const { selectedAddress } = useSelector((state) => state.deliveryAddress);
 
   useEffect(() => {
+    setLoading(true);
+
     const getData = async () => {
       try {
         let invoiceData = await axios.get(
@@ -36,9 +38,8 @@ const InvoiceDetails = () => {
 
   return (
     <div className="invoice-table-wrapper">
-      {loading ? (
-        <SkeletonInvoice />
-      ) : (
+      {loading && <SkeletonInvoice />}
+      {invoice.order && (
         <table className="invoice-table">
           <thead>
             <tr>

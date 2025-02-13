@@ -44,6 +44,7 @@ const Home = () => {
   // Effects for get the displayed product data
   useEffect(() => {
     dispatch(setLoadingState(true));
+    setLoadingTag(true);
 
     let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
 
@@ -83,8 +84,6 @@ const Home = () => {
 
   // Effects for get all the displayed tag data
   useEffect(() => {
-    setLoadingTag(true);
-
     const getTagData = async () => {
       try {
         const tags = await axios.get('http://localhost:3000/api/tags');
