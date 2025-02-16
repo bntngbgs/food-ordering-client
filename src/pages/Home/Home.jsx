@@ -3,7 +3,7 @@ import Tags from '../../components/Tags/Tags';
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Pagination from '../../components/Pagination/Pagination';
-import NotAuthModal from '../../components/notAuthModal/NotAuthModal';
+import NotAuthModal from '../../components/NotAuthModal/NotAuthModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -100,7 +100,7 @@ const Home = () => {
     };
 
     getTagData();
-  }, []);
+  }, [skip]);
 
   const handleCountPaginate = (e) => {
     let currentPage = parseInt(e.target.innerText);
