@@ -55,7 +55,7 @@ const Home = () => {
     const getProductData = async () => {
       try {
         const product = await axios.get(
-          `http://localhost:3000/api/products?q=${searchQuery}&limit=${limit}&skip=${skip}&category=${category}${tagQuery}`
+          `https://goodfood-api.vercel.app/api/products?q=${searchQuery}&limit=${limit}&skip=${skip}&category=${category}${tagQuery}`
         );
 
         console.log(product);
@@ -86,7 +86,9 @@ const Home = () => {
   useEffect(() => {
     const getTagData = async () => {
       try {
-        const tags = await axios.get('http://localhost:3000/api/tags');
+        const tags = await axios.get(
+          'https://goodfood-api.vercel.app/api/tags'
+        );
 
         if (!Array.isArray(tags.data)) {
           throw Error('API Error');
@@ -157,7 +159,7 @@ const Home = () => {
 
     try {
       const resultLength = await axios.get(
-        `http://localhost:3000/api/products?tags[]=${query}&limit=${0}`
+        `https://goodfood-api.vercel.app/api/products?tags[]=${query}&limit=${0}`
       );
 
       dispatch(setGlobalCount(resultLength.data.data));
