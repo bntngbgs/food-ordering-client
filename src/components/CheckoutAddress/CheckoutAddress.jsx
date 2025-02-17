@@ -10,8 +10,8 @@ import {
   setAddressInCheckout,
   setAddressLoadingState,
 } from '../../app/features/deliveryAddressSlice';
-import './CheckoutAddress.scss';
 import { toast } from 'react-toastify';
+import './CheckoutAddress.scss';
 
 const CheckoutAddress = () => {
   let navigate = useNavigate();
@@ -27,7 +27,7 @@ const CheckoutAddress = () => {
     const getAddressFromDB = async () => {
       try {
         let addressData = await axios.get(
-          'http://localhost:3000/api/delivery-address',
+          'https://goodfood-api.vercel.app/api/delivery-address',
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

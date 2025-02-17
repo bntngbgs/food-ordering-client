@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router';
-import './Breadcrumps.scss';
 import { useEffect, useState } from 'react';
 import { TiChevronRight } from 'react-icons/ti';
+import './Breadcrumps.scss';
 
 const Breadcrumbs = () => {
   const [crumbs, setCrumbs] = useState([]);

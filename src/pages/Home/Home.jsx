@@ -44,7 +44,6 @@ const Home = () => {
   // Effects for get the displayed product data
   useEffect(() => {
     dispatch(setLoadingState(true));
-    setLoadingTag(true);
 
     let tagQuery = tags.map((tag) => `&tags[]=${tag}`).join('');
 
@@ -57,8 +56,6 @@ const Home = () => {
         const product = await axios.get(
           `https://goodfood-api.vercel.app/api/products?q=${searchQuery}&limit=${limit}&skip=${skip}&category=${category}${tagQuery}`
         );
-
-        console.log(product);
 
         if (!product.data.data) {
           throw Error('API Error');
@@ -84,6 +81,8 @@ const Home = () => {
 
   // Effects for get all the displayed tag data
   useEffect(() => {
+    setLoadingTag(true);
+
     const getTagData = async () => {
       try {
         const tags = await axios.get(
@@ -102,7 +101,7 @@ const Home = () => {
     };
 
     getTagData();
-  }, [skip]);
+  }, []);
 
   const handleCountPaginate = (e) => {
     let currentPage = parseInt(e.target.innerText);
@@ -140,18 +139,6 @@ const Home = () => {
     dispatch(addTags(e.target.innerText));
 
     e.target.classList.add('active');
-
-    // let query = tags.map((tag) => `&tags[]=${tag}`).join('');
-
-    // try {
-    //   const resultLength = await axios.get(
-    //     `http://localhost:3000/api/products?${query}`
-    //   );
-
-    //   dispatch(setGlobalCount(resultLength.data.data));
-    // } catch (error) {
-    //   toast.error(`${error.message}: Can't set tag data length`);
-    // }
   };
 
   const getTagResultLength = async () => {

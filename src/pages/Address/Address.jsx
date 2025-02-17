@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
 import DeliveryAddress from '../../components/DeliveryAddress/DeliveryAddress';
 import AddressForm from '../../components/AddressForm/AddressForm';
-import './Address.scss';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAddressForm } from '../../app/features/deliveryAddressSlice';
+import './Address.scss';
 
 const Address = () => {
   const { toggleForm } = useSelector((state) => state.deliveryAddress);

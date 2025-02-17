@@ -19,7 +19,7 @@ const CategorySelect = ({ handleNavMenu }) => {
     const selectedOption = e.target.value;
     try {
       const productLength = await axios.get(
-        `http://localhost:3000/api/products?category=${selectedOption}`
+        `https://goodfood-api.vercel.app/api/products?category=${selectedOption}`
       );
 
       if (!Array.isArray(productLength.data.data)) {

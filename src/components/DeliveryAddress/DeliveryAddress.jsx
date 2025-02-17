@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWhenLogin } from '../../app/features/deliveryAddressSlice';
-import './DeliveryAddress.scss';
 import { toast } from 'react-toastify';
+import './DeliveryAddress.scss';
 
 const DeliveryAddress = () => {
   const { address } = useSelector((state) => state.deliveryAddress);
@@ -17,7 +17,7 @@ const DeliveryAddress = () => {
     const getDeliveryAddress = async () => {
       try {
         let response = await axios.get(
-          `http://localhost:3000/api/delivery-address`,
+          `https://goodfood-api.vercel.app/api/delivery-address`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

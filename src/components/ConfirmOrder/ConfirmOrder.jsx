@@ -8,9 +8,8 @@ import {
   setCheckoutAddress,
 } from '../../app/features/deliveryAddressSlice';
 import { setCurrentOrderId } from '../../app/features/userSlice';
-// import { clearCart } from '../../app/features/cartSlice';
-import './ConfirmOrder.scss';
 import { toast } from 'react-toastify';
+import './ConfirmOrder.scss';
 
 const ConfirmOrder = () => {
   const { address, selectedAddress } = useSelector(
@@ -47,7 +46,7 @@ const ConfirmOrder = () => {
   const handleConfirm = async () => {
     try {
       let saveToCart = await axios.put(
-        'http://localhost:3000/api/carts',
+        'https://goodfood-api.vercel.app/api/carts',
         cart,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -59,7 +58,7 @@ const ConfirmOrder = () => {
       }
 
       let saveToOrder = await axios.post(
-        'http://localhost:3000/api/orders',
+        'https://goodfood-api.vercel.app/api/orders',
         { delivery_fee: 20000, delivery_address: finalAddress.id },
         {
           headers: { Authorization: `Bearer ${token}` },

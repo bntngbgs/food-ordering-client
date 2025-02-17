@@ -54,7 +54,7 @@ const Register = () => {
 
     try {
       const user = await axios.post(
-        'http://localhost:3000/auth/register',
+        'https://goodfood-api.vercel.app/auth/register',
         userData
       );
 

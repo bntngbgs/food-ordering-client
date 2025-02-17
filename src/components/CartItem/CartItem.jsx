@@ -23,7 +23,7 @@ const CartItem = ({ img, title, price, qty }) => {
     <tr>
       <td>
         <img
-          src={`http://localhost:3000/images/products/${img}`}
+          src={`https://goodfood-api.vercel.app/images/products/${img}`}
           alt="food image"
           className="table-image"
         />

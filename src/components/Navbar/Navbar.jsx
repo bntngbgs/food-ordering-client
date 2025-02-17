@@ -9,8 +9,6 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaHamburger } from 'react-icons/fa';
-// import { IoClose } from 'react-icons/io5';
-// import { CgClose } from 'react-icons/cg';
 import { RiCloseLargeLine } from 'react-icons/ri';
 import './Navbar.scss';
 
@@ -52,17 +50,6 @@ const Navbar = () => {
         setMobileNav(false);
       }, 300);
     }
-
-    // setMobileNav(!mobileNav);
-    // setTimeout(() => {
-    //   if (!mobileNav) {
-    //     document.querySelector('.mobile-nav-wrapper').classList.add('slide-in');
-    //   } else {
-    //     document
-    //       .querySelector('.mobile-nav-wrapper')
-    //       .classList.remove('slide-in');
-    //   }
-    // }, 100);
   };
 
   const handleNavMenu = () => {

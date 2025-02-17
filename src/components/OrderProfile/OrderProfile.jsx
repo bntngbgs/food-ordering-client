@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoClose } from 'react-icons/io5';
 import { TbSquareRoundedChevronRightFilled } from 'react-icons/tb';
-import './OrderProfile.scss';
 import { setCurrentOrderId } from '../../app/features/userSlice';
 import { toast } from 'react-toastify';
+import './OrderProfile.scss';
 
 const OrderProfile = () => {
   const { token } = useSelector((state) => state.user);
@@ -24,9 +24,12 @@ const OrderProfile = () => {
 
     const getOrderData = async () => {
       try {
-        const order = await axios.get(`http://localhost:3000/api/orders`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const order = await axios.get(
+          `https://goodfood-api.vercel.app/api/orders`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (typeof order.data === 'string') {
           throw Error('API Error');

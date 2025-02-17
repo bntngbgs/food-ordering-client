@@ -1,10 +1,10 @@
 import axios from 'axios';
 import logo from '../../assets/logo.png';
+import SkeletonInvoice from '../Skeleton/SkeletonInvoice';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import './InvoiceDetails.scss';
-import SkeletonInvoice from '../Skeleton/SkeletonInvoice';
 import { toast } from 'react-toastify';
+import './InvoiceDetails.scss';
 
 const InvoiceDetails = () => {
   const [invoice, setInvoice] = useState({});
@@ -18,7 +18,7 @@ const InvoiceDetails = () => {
     const getData = async () => {
       try {
         let invoiceData = await axios.get(
-          `http://localhost:3000/api/invoices/${currentOrderId}`,
+          `https://goodfood-api.vercel.app/api/invoices/${currentOrderId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

@@ -47,7 +47,7 @@ const Login = () => {
 
     try {
       const user = await axios.post(
-        'http://localhost:3000/auth/login',
+        'https://goodfood-api.vercel.app/auth/login',
         loginData
       );
 

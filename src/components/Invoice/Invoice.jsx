@@ -1,10 +1,10 @@
 import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
 import Button from '../Button/Button';
-import './Invoice.scss';
 import { useDispatch } from 'react-redux';
 import { clearCart, resetCartState } from '../../app/features/cartSlice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import './Invoice.scss';
 
 const Invoice = () => {
   let dispatch = useDispatch();
@@ -35,13 +35,11 @@ const Invoice = () => {
       <InvoiceDetails />
 
       <div className="invoice-button-wrapper">
-        {/* <a href="/"> */}
         <Button
           variant="outline-reversed"
           text="Back to home"
           handleClick={handleClick}
         />
-        {/* </a> */}
       </div>
     </div>
   );

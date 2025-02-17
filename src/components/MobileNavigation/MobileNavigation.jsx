@@ -1,10 +1,10 @@
-import { Link } from 'react-router';
 import CartButton from '../CartButton/CartButton';
 import Button from '../Button/Button';
-import './MobileNavigation.scss';
 import CategorySelect from '../CategorySelect/CategorySelect';
+import { Link } from 'react-router';
 import { useSelector } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
+import './MobileNavigation.scss';
 
 const MobileNavigation = ({ showCategory, handleNavMenu }) => {
   const { role, full_name } = useSelector((state) => state.user);

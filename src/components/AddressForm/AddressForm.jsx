@@ -104,57 +104,6 @@ const AddressForm = ({ handleChangeShowForm }) => {
     }
   };
 
-  // fetch data kabupaten dari api setelah id.provinsi ter-set
-  // useEffect(() => {
-  //   const getWilayahApi = async () => {
-  //     try {
-  //       let response = await axios.get(
-  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/regencies/${id.provinsi}.json`
-  //       );
-
-  //       setWilayah((prev) => ({ ...prev, kabupaten: response.data }));
-  //     } catch (error) {
-  //       toast.error(`${error.message} 1: Tidak dapat terhubung ke API wilayah`);
-  //     }
-  //   };
-
-  //   getWilayahApi();
-  // }, [id.provinsi]);
-
-  // fetch data kecamatan dari api setelah id.kabupaten ter-set
-  // useEffect(() => {
-  //   const getWilayahApi = async () => {
-  //     try {
-  //       let response = await axios.get(
-  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/districts/${id.kabupaten}.json`
-  //       );
-
-  //       setWilayah((prev) => ({ ...prev, kecamatan: response.data }));
-  //     } catch (error) {
-  //       toast.error(`${error.message} 2: Tidak dapat terhubung ke API wilayah`);
-  //     }
-  //   };
-
-  //   getWilayahApi();
-  // }, [id.kabupaten]);
-
-  // fetch data kelurahan dari api setelah id.kecamatan ter-set
-  // useEffect(() => {
-  //   const getWilayahApi = async () => {
-  //     try {
-  //       let response = await axios.get(
-  //         `https://bntngbgs.github.io/api-wilayah-indonesia/api/villages/${id.kecamatan}.json`
-  //       );
-
-  //       setWilayah((prev) => ({ ...prev, kelurahan: response.data }));
-  //     } catch (error) {
-  //       toast.error(`${error.message} 3: Tidak dapat terhubung ke API wilayah`);
-  //     }
-  //   };
-
-  //   getWilayahApi();
-  // }, [id.kecamatan]);
-
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -228,18 +177,14 @@ const AddressForm = ({ handleChangeShowForm }) => {
 
     try {
       let response = await axios.post(
-        'http://localhost:3000/api/delivery-address',
+        'https://goodfood-api.vercel.app/api/delivery-address',
         validAddressData,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      console.log(response);
-
       if (response.data.error) {
-        // console.log(1);
-        // return;
         return Object.entries(response.data.field).forEach(([key, value]) =>
           setValidationError((prevState) => ({
             ...prevState,
