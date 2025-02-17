@@ -36,7 +36,7 @@ const Card = ({ product_id, img, title, price, category, tags }) => {
   return (
     <div className="card">
       <img
-        src={`http://localhost:3000/images/products/${img}`}
+        src={`https://goodfood-api.vercel.app/images/products/${img}`}
         className="card-image"
       />
       <div className="description">
